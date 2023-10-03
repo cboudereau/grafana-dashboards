@@ -70,6 +70,18 @@
       "keepTime": false,
       "tags": [],
       "targetBlank": true,
+      "title": "Grafana Labs",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://grafana.com/grafana/dashboards/19699"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
       "title": "github",
       "tooltip": "",
       "type": "link",
