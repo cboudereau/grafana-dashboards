@@ -7,13 +7,6 @@
       "type": "datasource",
       "pluginId": "cloudwatch",
       "pluginName": "CloudWatch"
-    },
-    {
-      "name": "VAR_FUNCTION_NAME",
-      "type": "constant",
-      "label": "Function Name",
-      "value": "",
-      "description": "AWS Lambda function name"
     }
   ],
   "__elements": {},
@@ -1306,8 +1299,6 @@
       "title": "Invocations",
       "type": "timeseries"
     },
-
-
     {
       "datasource": {
         "type": "cloudwatch",
@@ -1655,7 +1646,7 @@
           },
           "logGroups": [
             {
-              "name": "/aws/lambda/${VAR_FUNCTION_NAME}"
+              "name": "/aws/lambda/${function_name}"
             }
           ],
           "matchExact": true,
@@ -1815,15 +1806,13 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "${VAR_FUNCTION_NAME}",
-          "value": "${VAR_FUNCTION_NAME}"
+          "selected": false
         },
         "datasource": {
           "uid": "${datasource}"
         },
         "definition": "",
-        "hide": 2,
+        "hide": 1,
         "includeAll": false,
         "label": "FunctionName",
         "multi": false,
@@ -1884,7 +1873,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "AWS Lambda Insights / ${VAR_FUNCTION_NAME}",
+  "title": "AWS Lambda Insights",
   "uid": "22d763da-45fe-486f-a496-015fc2cee870",
   "version": 1,
   "weekStart": ""
