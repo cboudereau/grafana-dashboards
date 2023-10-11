@@ -1097,7 +1097,7 @@
               }
             ]
           },
-          "unit": "kbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -1138,7 +1138,7 @@
           "metricName": "tx_bytes",
           "metricQueryType": 0,
           "namespace": "LambdaInsights",
-          "period": "",
+          "period": "${period}",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
@@ -1154,7 +1154,6 @@
             "function_name": "${function_name}"
           },
           "expression": "",
-          "hide": true,
           "id": "",
           "label": "",
           "logGroups": [],
@@ -1307,6 +1306,8 @@
       "title": "Invocations",
       "type": "timeseries"
     },
+
+
     {
       "datasource": {
         "type": "cloudwatch",
@@ -1354,7 +1355,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1362,7 +1364,7 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "ms"
         },
         "overrides": []
       },
@@ -1403,7 +1405,7 @@
           "metricName": "cpu_total_time",
           "metricQueryType": 0,
           "namespace": "LambdaInsights",
-          "period": "",
+          "period": "${period}",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
@@ -1486,7 +1488,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1494,9 +1497,26 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "mbytes"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "memory_utilization"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 7,
@@ -1535,12 +1555,37 @@
           "metricName": "total_memory",
           "metricQueryType": 0,
           "namespace": "LambdaInsights",
-          "period": "",
+          "period": "${period}",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
           "sqlExpression": "",
           "statistic": "p99"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${DS_CLOUDWATCH}"
+          },
+          "dimensions": {
+            "function_name": "${function_name}"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "memory_utilization",
+          "metricQueryType": 0,
+          "namespace": "LambdaInsights",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "B",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Average"
         }
       ],
       "title": "Memory",
