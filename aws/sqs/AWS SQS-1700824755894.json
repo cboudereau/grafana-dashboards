@@ -63,6 +63,18 @@
       "tooltip": "",
       "type": "link",
       "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-available-cloudwatch-metrics.html"
+    },
+    {
+      "asDropdown": false,
+      "icon": "cloud",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "github",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://github.com/cboudereau/grafana-dashboards/tree/main/aws/sqs"
     }
   ],
   "liveNow": false,
