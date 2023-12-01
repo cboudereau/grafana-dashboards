@@ -774,5 +774,6 @@
   "uid": "0377675a-975e-4dfa-bd21-bbb84799ed80",
   "version": 20,
   "weekStart": "",
+  "slug": "aws-sqs-cloudwatch",
   "gnetId": 20042
 }
