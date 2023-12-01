@@ -37,7 +37,7 @@
       }
     ]
   },
-  "description": "",
+  "description": "This dashboard uses aws sqs namespace cloudwatch metrics.\r\nMultiple queues (deadletter and main queue) can be monitored at once.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -770,8 +770,9 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "AWS SQS",
+  "title": "AWS SQS CloudWatch",
   "uid": "0377675a-975e-4dfa-bd21-bbb84799ed80",
-  "version": 19,
-  "weekStart": ""
+  "version": 20,
+  "weekStart": "",
+  "gnetId": 20042
 }
