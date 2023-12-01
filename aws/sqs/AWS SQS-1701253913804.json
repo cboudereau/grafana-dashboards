@@ -18,7 +18,7 @@
       "type": "panel",
       "id": "timeseries",
       "name": "Time series",
-      "version": ""
+      "version": "10.3.0-63516"
     }
   ],
   "annotations": {
