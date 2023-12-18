@@ -1,13 +1,5 @@
 {
   "__inputs": [
-    {
-      "name": "DS_CLOUDWATCH",
-      "label": "Cloudwatch",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "cloudwatch",
-      "pluginName": "CloudWatch"
-    }
   ],
   "__elements": {},
   "__requires": [
@@ -21,7 +13,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.2.0-61469"
+      "version": "10.3.0-64167"
     },
     {
       "type": "panel",
@@ -95,344 +87,8 @@
       },
       "id": 14,
       "panels": [],
-      "title": "Performance / Errors",
+      "title": "Errors",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "cloudwatch",
-        "uid": "${datasource}"
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 20,
-      "links": [],
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "pluginVersion": "10.2.0-61469",
-      "targets": [
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "${datasource}"
-          },
-          "dimensions": {
-            "FunctionName": "${function_name}"
-          },
-          "expression": "fields @timestamp, function_name, billed_duration, shutdown_reason, @message, @logStream\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "logGroups": [
-            {
-              "name": "/aws/lambda-insights"
-            }
-          ],
-          "matchExact": true,
-          "metricEditorMode": 0,
-          "metricName": "Errors",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "${period}",
-          "queryMode": "Logs",
-          "refId": "A",
-          "region": "$region",
-          "returnData": false,
-          "sqlExpression": "",
-          "statistic": "Sum",
-          "statsGroups": []
-        }
-      ],
-      "title": "Shutdown reason",
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "cloudwatch",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "links": [],
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Duration Maximum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "custom.drawStyle",
-                "value": "line"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Duration Minimum"
-            },
-            "properties": [
-              {
-                "id": "custom.drawStyle",
-                "value": "line"
-              },
-              {
-                "id": "custom.fillOpacity",
-                "value": 0
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 11,
-        "x": 0,
-        "y": 8
-      },
-      "id": 1,
-      "links": [],
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max",
-            "min",
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.2.0-61469",
-      "targets": [
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "${datasource}"
-          },
-          "dimensions": {
-            "FunctionName": "${function_name}"
-          },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Duration",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "${period}",
-          "refId": "A",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Average"
-        },
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "${datasource}"
-          },
-          "dimensions": {
-            "FunctionName": "${function_name}"
-          },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": false,
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Duration",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "${period}",
-          "refId": "B",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Maximum"
-        },
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "uid": "${datasource}"
-          },
-          "dimensions": {
-            "FunctionName": "${function_name}"
-          },
-          "expression": "",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "hide": false,
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
-          "metricEditorMode": 0,
-          "metricName": "Duration",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "${period}",
-          "refId": "C",
-          "region": "$region",
-          "returnData": false,
-          "statistic": "Minimum"
-        }
-      ],
-      "title": "Duration",
-      "type": "timeseries"
     },
     {
       "datasource": {
@@ -543,10 +199,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 13,
-        "x": 11,
-        "y": 8
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 1
       },
       "id": 18,
       "links": [],
@@ -576,10 +232,12 @@
             "filter": ""
           },
           "datasource": {
+            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
-            "FunctionName": "${function_name}"
+            "FunctionName": "${function_name}",
+            "Resource": "*"
           },
           "expression": "",
           "functions": [],
@@ -594,7 +252,8 @@
           "item": {
             "filter": ""
           },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
+          "label": "${PROP('Dim.Resource')} ${PROP('MetricName')} ${PROP('Stat')}",
+          "matchExact": true,
           "metricEditorMode": 0,
           "metricName": "Errors",
           "metricQueryType": 0,
@@ -610,8 +269,165 @@
           "statistic": "Sum"
         }
       ],
-      "title": "Errors",
+      "title": "Errors ($period)",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 20,
+      "links": [],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "10.2.0-61469",
+      "targets": [
+        {
+          "alias": "{{metric}} {{stat}}",
+          "application": {
+            "filter": ""
+          },
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "FunctionName": "${function_name}"
+          },
+          "expression": "fields @timestamp, function_name, billed_duration, shutdown_reason, @message, @logStream\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "logGroups": [
+            {
+              "arn": "$lambda_log_groups",
+              "name": "$lambda_log_groups"
+            }
+          ],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "Errors",
+          "metricQueryType": 0,
+          "mode": 0,
+          "namespace": "AWS/Lambda",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "${period}",
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "returnData": false,
+          "sqlExpression": "",
+          "statistic": "Sum",
+          "statsGroups": []
+        }
+      ],
+      "title": "Shutdown reason",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 21,
+      "links": [],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "10.2.0-61469",
+      "targets": [
+        {
+          "alias": "{{metric}} {{stat}}",
+          "application": {
+            "filter": ""
+          },
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "FunctionName": "${function_name}"
+          },
+          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message LIKE \"ERROR\"",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "logGroups": [
+            {
+              "arn": "$lambda_log_groups",
+              "name": "$lambda_log_groups"
+            }
+          ],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "Errors",
+          "metricQueryType": 0,
+          "mode": 0,
+          "namespace": "AWS/Lambda",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "${period}",
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "returnData": false,
+          "sqlExpression": "",
+          "statistic": "Sum",
+          "statsGroups": []
+        }
+      ],
+      "title": "Error logs",
+      "type": "logs"
     },
     {
       "collapsed": false,
@@ -619,7 +435,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 20
       },
       "id": 13,
       "panels": [],
@@ -738,7 +554,7 @@
         "h": 9,
         "w": 11,
         "x": 0,
-        "y": 17
+        "y": 21
       },
       "id": 10,
       "links": [],
@@ -768,10 +584,12 @@
             "filter": ""
           },
           "datasource": {
+            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
-            "FunctionName": "${function_name}"
+            "FunctionName": "$function_name",
+            "Resource": "*"
           },
           "expression": "",
           "functions": [],
@@ -786,7 +604,7 @@
           "item": {
             "filter": ""
           },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
+          "label": "${PROP('Dim.Resource')}  ${PROP('MetricName')} ${PROP('Stat')}",
           "matchExact": true,
           "metricEditorMode": 0,
           "metricName": "ConcurrentExecutions",
@@ -808,6 +626,7 @@
             "filter": ""
           },
           "datasource": {
+            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {},
@@ -816,6 +635,7 @@
           "group": {
             "filter": ""
           },
+          "hide": false,
           "highResolution": false,
           "host": {
             "filter": ""
@@ -840,7 +660,7 @@
           "statistic": "Maximum"
         }
       ],
-      "title": "Concurrent Executions",
+      "title": "Concurrent Executions ($period)",
       "type": "timeseries"
     },
     {
@@ -955,7 +775,7 @@
         "h": 9,
         "w": 13,
         "x": 11,
-        "y": 17
+        "y": 21
       },
       "id": 9,
       "links": [],
@@ -985,10 +805,12 @@
             "filter": ""
           },
           "datasource": {
+            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
-            "FunctionName": "${function_name}"
+            "FunctionName": "${function_name}",
+            "Resource": "*"
           },
           "expression": "",
           "functions": [],
@@ -1003,7 +825,8 @@
           "item": {
             "filter": ""
           },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
+          "label": "${PROP('Dim.Resource')}  ${PROP('MetricName')} ${PROP('Stat')}",
+          "matchExact": true,
           "metricEditorMode": 0,
           "metricName": "Throttles",
           "metricQueryType": 0,
@@ -1019,7 +842,7 @@
           "statistic": "Sum"
         }
       ],
-      "title": "Throttles",
+      "title": "Throttles ($period)",
       "type": "timeseries"
     },
     {
@@ -1028,7 +851,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 30
       },
       "id": 11,
       "panels": [],
@@ -1038,7 +861,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CLOUDWATCH}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1082,7 +905,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1092,13 +916,26 @@
           },
           "unit": "bytes"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "rx_bytes"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 7,
         "w": 5,
         "x": 0,
-        "y": 27
+        "y": 31
       },
       "id": 15,
       "options": {
@@ -1117,7 +954,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CLOUDWATCH}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "function_name": "${function_name}"
@@ -1141,12 +978,13 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CLOUDWATCH}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "function_name": "${function_name}"
           },
           "expression": "",
+          "hide": false,
           "id": "",
           "label": "",
           "logGroups": [],
@@ -1163,7 +1001,7 @@
           "statistic": "p99"
         }
       ],
-      "title": "Network: p99",
+      "title": "Network: p99 ($period)",
       "type": "timeseries"
     },
     {
@@ -1215,7 +1053,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1231,7 +1070,7 @@
         "h": 7,
         "w": 6,
         "x": 5,
-        "y": 27
+        "y": 31
       },
       "id": 7,
       "links": [],
@@ -1261,10 +1100,12 @@
             "filter": ""
           },
           "datasource": {
+            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
-            "FunctionName": "${function_name}"
+            "FunctionName": "${function_name}",
+            "Resource": "*"
           },
           "expression": "",
           "functions": [],
@@ -1279,7 +1120,7 @@
           "item": {
             "filter": ""
           },
-          "label": "${PROP('MetricName')} ${PROP('Stat')}",
+          "label": "",
           "matchExact": true,
           "metricEditorMode": 0,
           "metricName": "Invocations",
@@ -1296,13 +1137,13 @@
           "statistic": "Sum"
         }
       ],
-      "title": "Invocations",
+      "title": "Invocations sum ($period)",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CLOUDWATCH}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1363,7 +1204,7 @@
         "h": 7,
         "w": 6,
         "x": 11,
-        "y": 27
+        "y": 31
       },
       "id": 16,
       "options": {
@@ -1382,12 +1223,13 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CLOUDWATCH}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "function_name": "${function_name}"
           },
           "expression": "",
+          "hide": false,
           "id": "",
           "label": "",
           "logGroups": [],
@@ -1406,7 +1248,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CLOUDWATCH}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "function_name": "${function_name}"
@@ -1429,13 +1271,13 @@
           "statistic": "p99"
         }
       ],
-      "title": "Cpu / Init time",
+      "title": "Cpu / Init time ($period)",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CLOUDWATCH}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1513,7 +1355,7 @@
         "h": 7,
         "w": 7,
         "x": 17,
-        "y": 27
+        "y": 31
       },
       "id": 17,
       "options": {
@@ -1532,7 +1374,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CLOUDWATCH}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "function_name": "${function_name}"
@@ -1556,7 +1398,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CLOUDWATCH}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "function_name": "${function_name}"
@@ -1579,7 +1421,7 @@
           "statistic": "Average"
         }
       ],
-      "title": "Memory",
+      "title": "Memory ($period)",
       "type": "timeseries"
     },
     {
@@ -1588,7 +1430,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 38
       },
       "id": 19,
       "panels": [],
@@ -1600,23 +1442,24 @@
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
+      "description": "",
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 39
       },
-      "id": 8,
+      "id": 22,
       "links": [],
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
-        "prettifyLogMessage": false,
+        "prettifyLogMessage": true,
         "showCommonLabels": false,
         "showLabels": false,
-        "showTime": false,
+        "showTime": true,
         "sortOrder": "Descending",
-        "wrapLogMessage": false
+        "wrapLogMessage": true
       },
       "pluginVersion": "10.2.0-61469",
       "targets": [
@@ -1626,12 +1469,13 @@
             "filter": ""
           },
           "datasource": {
+            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, function_name, billed_duration, shutdown_reason, @message, @logStream\n| sort @timestamp desc",
+          "expression": "fields @timestamp, @message, @logStream, @log, function_name\n| filter  (@log LIKE \"$function_name\" OR function_name LIKE \"$function_name\")\n| sort @timestamp desc",
           "functions": [],
           "group": {
             "filter": ""
@@ -1646,7 +1490,8 @@
           },
           "logGroups": [
             {
-              "name": "/aws/lambda/${function_name}"
+              "arn": "$lambda_log_groups",
+              "name": "$lambda_log_groups"
             }
           ],
           "matchExact": true,
@@ -1668,11 +1513,90 @@
           "statsGroups": []
         }
       ],
+      "title": "Lambda",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 8,
+      "links": [],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "10.2.0-61469",
+      "targets": [
+        {
+          "alias": "{{metric}} {{stat}}",
+          "application": {
+            "filter": ""
+          },
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "FunctionName": "${function_name}"
+          },
+          "expression": "fields @timestamp, function_name, billed_duration, shutdown_reason, @message, @logStream\n| filter function_name = \"$function_name\"\n| sort @timestamp desc",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "logGroups": [
+            {
+              "arn": "$lambda_log_groups",
+              "name": "$lambda_log_groups"
+            }
+          ],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "Errors",
+          "metricQueryType": 0,
+          "mode": 0,
+          "namespace": "AWS/Lambda",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "${period}",
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "returnData": false,
+          "sqlExpression": "",
+          "statistic": "Sum",
+          "statsGroups": []
+        }
+      ],
+      "title": "Lambda Insights",
       "type": "logs"
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [
     "cloudwatch"
   ],
@@ -1682,7 +1606,7 @@
         "current": {
           "selected": false,
           "text": "Cloudwatch",
-          "value": "${DS_CLOUDWATCH}"
+          "value": "${datasource}"
         },
         "hide": 1,
         "includeAll": false,
@@ -1704,7 +1628,7 @@
         "current": {
           "selected": false,
           "text": "auto",
-          "value": "$__auto_interval_agg"
+          "value": "$__auto_interval_period"
         },
         "hide": 0,
         "label": "Period",
@@ -1713,7 +1637,7 @@
           {
             "selected": true,
             "text": "auto",
-            "value": "$__auto_interval_agg"
+            "value": "$__auto_interval_period"
           },
           {
             "selected": false,
@@ -1785,6 +1709,7 @@
       {
         "current": {},
         "datasource": {
+          "type": "cloudwatch",
           "uid": "${datasource}"
         },
         "definition": "regions()",
@@ -1805,10 +1730,9 @@
         "useTags": false
       },
       {
-        "current": {
-          "selected": false
-        },
+        "current": {},
         "datasource": {
+          "type": "cloudwatch",
           "uid": "${datasource}"
         },
         "definition": "",
@@ -1840,11 +1764,36 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "${datasource}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Log groups",
+        "multi": true,
+        "name": "lambda_log_groups",
+        "options": [],
+        "query": {
+          "logGroupPrefix": "",
+          "queryType": "logGroups",
+          "refId": "CloudWatchVariableQueryEditor-VariableQuery",
+          "region": "default"
+        },
+        "refresh": 1,
+        "regex": "/\\b(?:${function_name}|lambda-insights)\\b/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1875,6 +1824,8 @@
   "timezone": "browser",
   "title": "AWS Lambda Insights",
   "uid": "22d763da-45fe-486f-a496-015fc2cee870",
-  "version": 1,
-  "weekStart": ""
+  "version": 4,
+  "weekStart": "",
+  "slug": "aws-lambda-insights",
+  "gnetId": 19734
 }
