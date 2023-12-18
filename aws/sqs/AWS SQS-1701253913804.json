@@ -12,13 +12,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.3.0-63516"
+      "version": "10.3.0-64167"
     },
     {
       "type": "panel",
       "id": "timeseries",
       "name": "Time series",
-      "version": "10.3.0-63516"
+      "version": "10.3.0-64167"
     }
   ],
   "annotations": {
@@ -81,7 +81,7 @@
       "panels": [],
       "repeat": "queue",
       "repeatDirection": "h",
-      "title": "$queue",
+      "title": "$queue ($period)",
       "type": "row"
     },
     {
@@ -180,7 +180,7 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 8,
         "x": 0,
         "y": 1
@@ -188,10 +188,12 @@
       "id": 3,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "sum"
+          ],
           "displayMode": "table",
-          "placement": "right",
-          "showLegend": false
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -217,7 +219,7 @@
           "metricName": "ApproximateNumberOfMessagesVisible",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "G",
           "region": "default",
@@ -242,7 +244,7 @@
           "metricName": "ApproximateNumberOfMessagesNotVisible",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
@@ -413,7 +415,7 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 8,
         "x": 8,
         "y": 1
@@ -421,10 +423,12 @@
       "id": 6,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "sum"
+          ],
           "displayMode": "table",
-          "placement": "right",
-          "showLegend": false
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -450,7 +454,7 @@
           "metricName": "NumberOfMessagesReceived",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "B",
           "region": "default",
@@ -475,7 +479,7 @@
           "metricName": "NumberOfMessagesDeleted",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "C",
           "region": "default",
@@ -500,7 +504,7 @@
           "metricName": "NumberOfMessagesSent",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "E",
           "region": "default",
@@ -525,7 +529,7 @@
           "metricName": "NumberOfEmptyReceives",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
@@ -550,7 +554,7 @@
           "metricName": "ApproximateNumberOfMessagesDelayed",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "D",
           "region": "default",
@@ -575,7 +579,7 @@
           "metricName": "SentMessageSize",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "F",
           "region": "default",
@@ -663,7 +667,7 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 8,
         "x": 16,
         "y": 1
@@ -671,10 +675,14 @@
       "id": 10,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "max",
+            "mean",
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -699,7 +707,7 @@
           "metricName": "ApproximateAgeOfOldestMessage",
           "metricQueryType": 0,
           "namespace": "AWS/SQS",
-          "period": "",
+          "period": "$period",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
@@ -711,7 +719,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": "5s",
   "schemaVersion": 39,
   "tags": [
     "cloudwatch"
@@ -730,6 +738,7 @@
         "name": "datasource",
         "options": [],
         "query": "cloudwatch",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -761,6 +770,85 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "auto": true,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "auto",
+          "value": "$__auto_interval_period"
+        },
+        "hide": 0,
+        "name": "period",
+        "options": [
+          {
+            "selected": true,
+            "text": "auto",
+            "value": "$__auto_interval_period"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "1m,5m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
       }
     ]
   },
