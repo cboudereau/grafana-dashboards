@@ -860,7 +860,7 @@
   "timezone": "",
   "title": "AWS SQS CloudWatch",
   "uid": "0377675a-975e-4dfa-bd21-bbb84799ed80",
-  "version": 20,
+  "version": 4,
   "weekStart": "",
   "slug": "aws-sqs-cloudwatch",
   "gnetId": 20042
