@@ -60,7 +60,20 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "cloud",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "github",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://github.com/cboudereau/grafana-dashboards/tree/main/aws/billing"
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -1155,7 +1168,7 @@
   },
   "timezone": "browser",
   "title": "AWS Multi Account Billing",
-  "uid": "i_KLxZyVz",
+  "uid": "10c4d62e-92c2-4d93-b1e8-c48c8ad78772",
   "version": 41,
   "weekStart": ""
 }
