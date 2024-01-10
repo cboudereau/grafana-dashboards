@@ -1154,7 +1154,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "AWS Billing",
+  "title": "AWS Multi Account Billing",
   "uid": "i_KLxZyVz",
   "version": 41,
   "weekStart": ""
