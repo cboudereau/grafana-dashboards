@@ -15,12 +15,6 @@
       "version": ""
     },
     {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
       "type": "panel",
       "id": "stat",
       "name": "Stat",
@@ -1038,14 +1032,8 @@
         "current": {
           "selected": true,
           "text": [
-            "cw-inx-dev",
-            "cw-inx-oat",
-            "cw-inx-pro"
           ],
           "value": [
-            "dab4d9c4-0989-4e3c-ad16-2f5a63b0f762",
-            "ade6d49f-8243-4e66-a9c6-251b55239e17",
-            "c2483192-b249-41d3-9cde-9002ac91f8a9"
           ]
         },
         "hide": 1,
@@ -1170,5 +1158,7 @@
   "title": "AWS Multi Account Billing",
   "uid": "10c4d62e-92c2-4d93-b1e8-c48c8ad78772",
   "version": 41,
-  "weekStart": ""
+  "weekStart": "",
+  "gnetId": "20284",
+  "slug": "aws-multi-account-billing"
 }
