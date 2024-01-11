@@ -1031,10 +1031,8 @@
       {
         "current": {
           "selected": true,
-          "text": [
-          ],
-          "value": [
-          ]
+          "text": [],
+          "value": []
         },
         "hide": 1,
         "includeAll": false,
