@@ -13,7 +13,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.3.0-64167"
+      "version": "10.4.0-65039"
     },
     {
       "type": "panel",
@@ -148,7 +148,8 @@
               }
             ]
           },
-          "unit": "none"
+          "unit": "none",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -209,15 +210,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean",
-            "lastNotNull",
-            "max",
-            "min",
             "sum"
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -295,7 +292,7 @@
         "sortOrder": "Descending",
         "wrapLogMessage": false
       },
-      "pluginVersion": "10.2.0-61469",
+      "pluginVersion": "10.4.0-65039",
       "targets": [
         {
           "alias": "{{metric}} {{stat}}",
@@ -309,7 +306,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, function_name, billed_duration, shutdown_reason, @message, @logStream\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)",
+          "expression": "fields @timestamp, function_name, shutdown_reason, @message\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)\n| display  @timestamp, @message",
           "functions": [],
           "group": {
             "filter": ""
@@ -374,7 +371,7 @@
         "sortOrder": "Descending",
         "wrapLogMessage": true
       },
-      "pluginVersion": "10.2.0-61469",
+      "pluginVersion": "10.4.0-65039",
       "targets": [
         {
           "alias": "{{metric}} {{stat}}",
@@ -388,7 +385,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message LIKE \"ERROR\"",
+          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message LIKE \"ERROR\"\n| display @timestamp, @message",
           "functions": [],
           "group": {
             "filter": ""
@@ -500,7 +497,8 @@
               }
             ]
           },
-          "unit": "none"
+          "unit": "none",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -721,7 +719,8 @@
               }
             ]
           },
-          "unit": "none"
+          "unit": "none",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -846,12 +845,280 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dtdurationms",
+          "unitScale": false
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Throttles Sum"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e24d42",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Throttles_Average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#EAB839",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Throttles_Sum"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#EAB839",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 23,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.0-61469",
+      "targets": [
+        {
+          "alias": "{{metric}} {{stat}}",
+          "application": {
+            "filter": ""
+          },
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "FunctionName": "$function_name",
+            "Resource": "*"
+          },
+          "expression": "",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "label": "${PROP('Dim.Resource')}  ${PROP('MetricName')} ${PROP('Stat')}",
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "Duration",
+          "metricQueryType": 0,
+          "mode": 0,
+          "namespace": "AWS/Lambda",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "${period}",
+          "refId": "A",
+          "region": "$region",
+          "returnData": false,
+          "statistic": "Average"
+        },
+        {
+          "alias": "{{metric}} {{stat}}",
+          "application": {
+            "filter": ""
+          },
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "FunctionName": "$function_name",
+            "Resource": "*"
+          },
+          "expression": "",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "hide": false,
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "label": "${PROP('Dim.Resource')}  ${PROP('MetricName')} ${PROP('Stat')}",
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "Duration",
+          "metricQueryType": 0,
+          "mode": 0,
+          "namespace": "AWS/Lambda",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "${period}",
+          "refId": "B",
+          "region": "$region",
+          "returnData": false,
+          "statistic": "Maximum"
+        },
+        {
+          "alias": "{{metric}} {{stat}}",
+          "application": {
+            "filter": ""
+          },
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "FunctionName": "$function_name",
+            "Resource": "*"
+          },
+          "expression": "",
+          "functions": [],
+          "group": {
+            "filter": ""
+          },
+          "hide": false,
+          "highResolution": false,
+          "host": {
+            "filter": ""
+          },
+          "id": "",
+          "item": {
+            "filter": ""
+          },
+          "label": "${PROP('Dim.Resource')}  ${PROP('MetricName')} ${PROP('Stat')}",
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "Duration",
+          "metricQueryType": 0,
+          "mode": 0,
+          "namespace": "AWS/Lambda",
+          "options": {
+            "showDisabledItems": false
+          },
+          "period": "${period}",
+          "refId": "C",
+          "region": "$region",
+          "returnData": false,
+          "statistic": "Minimum"
+        }
+      ],
+      "title": "Duration ($period)",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 38
       },
       "id": 11,
       "panels": [],
@@ -914,7 +1181,8 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "bytes",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -935,7 +1203,7 @@
         "h": 7,
         "w": 5,
         "x": 0,
-        "y": 31
+        "y": 39
       },
       "id": 15,
       "options": {
@@ -1062,7 +1330,8 @@
               }
             ]
           },
-          "unit": "none"
+          "unit": "none",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -1070,7 +1339,7 @@
         "h": 7,
         "w": 6,
         "x": 5,
-        "y": 31
+        "y": 39
       },
       "id": 7,
       "links": [],
@@ -1196,7 +1465,8 @@
               }
             ]
           },
-          "unit": "ms"
+          "unit": "ms",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -1204,7 +1474,7 @@
         "h": 7,
         "w": 6,
         "x": 11,
-        "y": 31
+        "y": 39
       },
       "id": 16,
       "options": {
@@ -1330,7 +1600,8 @@
               }
             ]
           },
-          "unit": "mbytes"
+          "unit": "mbytes",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1355,7 +1626,7 @@
         "h": 7,
         "w": 7,
         "x": 17,
-        "y": 31
+        "y": 39
       },
       "id": 17,
       "options": {
@@ -1430,7 +1701,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 46
       },
       "id": 19,
       "panels": [],
@@ -1447,7 +1718,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 47
       },
       "id": 22,
       "links": [],
@@ -1475,7 +1746,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, @message, @logStream, @log, function_name\n| filter  (@log LIKE \"$function_name\" OR function_name LIKE \"$function_name\")\n| sort @timestamp desc",
+          "expression": "fields @timestamp, @message, @logStream, @log, function_name\n| filter  (@log LIKE \"$function_name\" OR function_name LIKE \"$function_name\")\n| sort @timestamp desc\n| display @timestamp, @message ",
           "functions": [],
           "group": {
             "filter": ""
@@ -1525,7 +1796,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 54
       },
       "id": 8,
       "links": [],
@@ -1553,7 +1824,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, function_name, billed_duration, shutdown_reason, @message, @logStream\n| filter function_name = \"$function_name\"\n| sort @timestamp desc",
+          "expression": "fields @timestamp, function_name, @message\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| display @timestamp, @message",
           "functions": [],
           "group": {
             "filter": ""
@@ -1824,7 +2095,7 @@
   "timezone": "browser",
   "title": "AWS Lambda Insights",
   "uid": "22d763da-45fe-486f-a496-015fc2cee870",
-  "version": 4,
+  "version": 5,
   "weekStart": "",
   "slug": "aws-lambda-insights",
   "gnetId": 19734
