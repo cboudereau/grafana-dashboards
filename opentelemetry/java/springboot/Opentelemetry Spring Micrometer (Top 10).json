@@ -3658,7 +3658,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Opentelemetry Spring Micrometer (Top 10)",
+  "title": "OpenTelemetry Spring Micrometer (Top 10)",
   "uid": "opentelemetry-spring-micrometer-top-10",
   "version": 7,
   "weekStart": ""

@@ -3509,7 +3509,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Opentelemetry Spring Micrometer",
+  "title": "OpenTelemetry Spring Micrometer",
   "uid": "opentelemetry-spring-micrometer",
   "version": 7,
   "weekStart": ""
