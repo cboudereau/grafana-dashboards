@@ -1,7 +1,12 @@
-# Opentelemetry Spring Boot dashboard
+# OpenTelemetry Spring Boot dashboard
 
 Metrics are sent via micrometer-otlp.
 Logs are sent via the opentelemetry exporter.
+
+Those dashboards are availble at grafana.com:
+ - [main dashbaord](https://grafana.com/grafana/dashboards/20352)
+ - [detailed dashboard (datalink support)](https://grafana.com/grafana/dashboards/20353)
+
 
 This dashboard has been built by following:
 - [USE method by Brendan Gregg](https://www.brendangregg.com/usemethod.html#:~:text=The%20Utilization%20Saturation%20and%20Errors,identifying%20resource%20bottlenecks%20or%20errors.)
