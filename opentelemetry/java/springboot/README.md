@@ -4,7 +4,7 @@ Metrics are sent via micrometer-otlp.
 Logs are sent via the opentelemetry exporter.
 
 Those dashboards are availble at grafana.com:
- - [main dashbaord](https://grafana.com/grafana/dashboards/20352)
+ - [main dashboard](https://grafana.com/grafana/dashboards/20352)
  - [detailed dashboard (datalink support)](https://grafana.com/grafana/dashboards/20353)
 
 
