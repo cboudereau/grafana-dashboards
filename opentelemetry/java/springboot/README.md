@@ -1,0 +1,26 @@
+# Opentelemetry Spring Boot dashboard
+
+Metrics are sent via micrometer-otlp.
+Logs are sent via the opentelemetry exporter.
+
+Used datasources are [Mimir](https://grafana.com/oss/mimir/) and [Loki](https://grafana.com/oss/loki/) and a full demo is availble here: TODO
+
+## Stats
+![Stats](./top_10_1.png)
+
+## RED
+![RED](./top_10_2.png)
+
+# Saturation
+![Saturation](./top_10_3.png)
+
+# Utilization (JVM)
+![Utilization (JVM) part 1](./top_10_4.png)
+![Utilization (JVM) part 1](./top_10_5.png)
+
+# JVM Garbage Collection and Memory
+![JVM Garbage Collection and Memory part1](./top_10_6.png)
+![JVM Garbage Collection and Memory part2](./top_10_7.png)
+
+# Logs
+![Logs](./top_10_8.png)
