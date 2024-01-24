@@ -20,16 +20,16 @@ Used datasources are [Mimir](https://grafana.com/oss/mimir/) and [Loki](https://
 ## RED
 ![RED](./top_10_2.png)
 
-# Saturation
+## Saturation
 ![Saturation](./top_10_3.png)
 
-# Utilization (JVM)
+## Utilization (JVM)
 ![Utilization (JVM) part 1](./top_10_4.png)
 ![Utilization (JVM) part 1](./top_10_5.png)
 
-# JVM Garbage Collection and Memory
+## JVM Garbage Collection and Memory
 ![JVM Garbage Collection and Memory part1](./top_10_6.png)
 ![JVM Garbage Collection and Memory part2](./top_10_7.png)
 
-# Logs
+## Logs
 ![Logs](./top_10_8.png)
