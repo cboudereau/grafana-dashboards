@@ -1,4 +1,4 @@
-# OpenTelemetry Spring Boot dashboard
+# OpenTelemetry JVM Spring Boot dashboard
 
 Metrics are sent via micrometer-otlp.
 Logs are sent via the opentelemetry exporter.
