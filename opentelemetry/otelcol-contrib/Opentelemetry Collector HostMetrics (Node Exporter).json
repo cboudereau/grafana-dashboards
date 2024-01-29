@@ -1852,7 +1852,7 @@
             "uid": "${DS_MIMIR}"
           },
           "editorMode": "code",
-          "expr": "system_memory_utilization{host_name=\"${host}\",service_namespace=\"${service_namespace}\", state=\"free\"}",
+          "expr": "system_memory_usage{host_name=\"${host}\",service_namespace=\"${service_namespace}\", state=\"free\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1867,7 +1867,7 @@
             "uid": "${DS_MIMIR}"
           },
           "editorMode": "code",
-          "expr": "sum(system_memory_utilization{host_name=\"${host}\",service_namespace=\"${service_namespace}\", state=~\"cached|buffered\"})",
+          "expr": "sum(system_memory_usage{host_name=\"${host}\",service_namespace=\"${service_namespace}\", state=~\"cached|buffered\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "RAM Cache + Buffer",
