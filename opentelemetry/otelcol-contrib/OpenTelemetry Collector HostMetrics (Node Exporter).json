@@ -67,7 +67,6 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 1860,
   "graphTooltip": 1,
   "id": null,
   "links": [
@@ -4108,7 +4107,10 @@
   },
   "timezone": "browser",
   "title": "OpenTelemetry Collector HostMetrics (Node Exporter)",
-  "uid": "rYdddlPWk",
+  "uid": "otelcol-contrib-hostmetrics",
+  "slug": "otelcol-contrib-hostmetrics",
   "version": 2,
-  "weekStart": ""
+  "weekStart": "",
+  "gnetId": 20376,
+  "description": "OpenTelemetry Collector otelcol-contrib hostmetrics (Node Exporter)"
 }
