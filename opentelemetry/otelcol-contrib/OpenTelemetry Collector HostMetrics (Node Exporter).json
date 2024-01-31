@@ -4077,7 +4077,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -4109,7 +4109,7 @@
   "title": "OpenTelemetry Collector HostMetrics (Node Exporter)",
   "uid": "otelcol-contrib-hostmetrics",
   "slug": "otelcol-contrib-hostmetrics",
-  "version": 2,
+  "version": 3,
   "weekStart": "",
   "gnetId": 20376,
   "description": "OpenTelemetry Collector otelcol-contrib hostmetrics (Node Exporter)"
