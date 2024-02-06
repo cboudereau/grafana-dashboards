@@ -13,7 +13,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.0-65039"
+      "version": "10.4.0-65875"
     },
     {
       "type": "panel",
@@ -98,7 +98,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "dark-red",
+            "mode": "shades"
           },
           "custom": {
             "axisBorderShow": false,
@@ -504,45 +505,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Throttles Sum"
+              "options": "Global UnreservedConcurrentExecutions Maximum"
             },
             "properties": [
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Throttles_Average"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Throttles_Sum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
-                }
+                "id": "custom.lineWidth",
+                "value": 0
               }
             ]
           }
@@ -567,7 +535,7 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -669,7 +637,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "dark-orange",
+            "mode": "shades"
           },
           "custom": {
             "axisBorderShow": false,
@@ -874,7 +843,8 @@
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
-              "type": "linear"
+              "log": 2,
+              "type": "log"
             },
             "showPoints": "always",
             "spanNulls": false,
@@ -909,45 +879,69 @@
         "overrides": [
           {
             "matcher": {
-              "id": "byName",
-              "options": "Throttles Sum"
+              "id": "byRegexp",
+              "options": "/Maximum$/"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
+                  "fixedColor": "dark-yellow",
+                  "mode": "shades"
                 }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 20
               }
             ]
           },
           {
             "matcher": {
-              "id": "byName",
-              "options": "Throttles_Average"
+              "id": "byRegexp",
+              "options": "/Minimum$/"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
+                  "fixedColor": "super-light-yellow",
+                  "mode": "shades"
                 }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 9
               }
             ]
           },
           {
             "matcher": {
-              "id": "byName",
-              "options": "Throttles_Sum"
+              "id": "byRegexp",
+              "options": "/Average$/"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
+                  "fixedColor": "dark-green",
+                  "mode": "shades"
                 }
               }
             ]
@@ -1137,13 +1131,13 @@
           },
           "custom": {
             "axisBorderShow": false,
-            "axisCenteredZero": false,
+            "axisCenteredZero": true,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 16,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -1172,8 +1166,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1194,6 +1187,18 @@
               {
                 "id": "custom.axisPlacement",
                 "value": "right"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tx_bytes"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
               }
             ]
           }
@@ -1321,8 +1326,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1456,8 +1460,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1591,8 +1594,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1617,6 +1619,25 @@
               {
                 "id": "unit",
                 "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_memory"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "shades"
+                }
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
               }
             ]
           }
@@ -2095,7 +2116,7 @@
   "timezone": "browser",
   "title": "AWS Lambda Insights",
   "uid": "22d763da-45fe-486f-a496-015fc2cee870",
-  "version": 5,
+  "version": 6,
   "weekStart": "",
   "slug": "aws-lambda-insights",
   "gnetId": 19734
