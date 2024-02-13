@@ -368,7 +368,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(http_server_requests{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=\"${host_name}\"}) by (quantile)",
+          "expr": "avg(http_server_requests{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=\"${host_name}\"}) by (quantile)",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -3548,7 +3548,7 @@
   "title": "OpenTelemetry JVM Micrometer (per instance)",
   "uid": "otel-jvm-micrometer-per-instance",
   "slug": "otel-jvm-micrometer-per-instance",
-  "version": 8,
+  "version": 9,
   "weekStart": "",
   "gnetId": 20353,
   "description": "This dashboard is the detailed version for the data link support of the main dashboard: https://grafana.com/grafana/dashboards/20352\r\n\r\nOpenTelemetry Spring Micrometer (Top 10) using RED and USE method"

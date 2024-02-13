@@ -380,7 +380,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(http_server_requests{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\"}) by (quantile)",
+          "expr": "avg(http_server_requests{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\"}) by (quantile)",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -3744,7 +3744,7 @@
   "title": "OpenTelemetry JVM Micrometer",
   "uid": "otel-jvm-micrometer",
   "slug": "otel-jvm-micrometer",
-  "version": 8,
+  "version": 9,
   "weekStart": "",
   "gnetId": 20352,
   "description": "OpenTelemetry JVM Micrometer using RED and USE method"
