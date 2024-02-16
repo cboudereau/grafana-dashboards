@@ -17,13 +17,6 @@
       "pluginName": "Prometheus"
     },
     {
-      "name": "DS_EXPRESSION",
-      "label": "Expression",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "__expr__"
-    },
-    {
       "name": "DS_GRAFANACLOUD-USAGE-INSIGHTS",
       "label": "grafanacloud-usage-insights",
       "description": "",
@@ -742,7 +735,7 @@
         {
           "datasource": {
             "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
+            "uid": "${DS_GRAFANACLOUD-PROM}"
           },
           "expression": "$TenantActiveUsers/$AllActiveUsers*$AdditionalUsageAmount",
           "hide": true,
