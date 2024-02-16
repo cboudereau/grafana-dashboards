@@ -19,7 +19,7 @@
     {
       "name": "DS_GRAFANACLOUD-USAGE-INSIGHTS",
       "label": "grafanacloud-usage-insights",
-      "description": "",
+      "description": "GrafanaCloud loki usage insights datasource",
       "type": "datasource",
       "pluginId": "loki",
       "pluginName": "Loki"
