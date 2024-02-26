@@ -1764,7 +1764,7 @@
           "editorMode": "code",
           "expr": "max_over_time(process_threads{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"}[$__rate_interval])",
           "instant": false,
-          "legendFormat": "Memory Usage",
+          "legendFormat": "Process Threads",
           "range": true,
           "refId": "A"
         }
@@ -2658,7 +2658,7 @@
           "editorMode": "code",
           "expr": "max_over_time(process_runtime_dotnet_thread_pool_threads_count{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"}[$__rate_interval])",
           "instant": false,
-          "legendFormat": "Memory Usage",
+          "legendFormat": "Thead Pool Threads",
           "range": true,
           "refId": "A"
         }
@@ -2728,7 +2728,7 @@
           "editorMode": "code",
           "expr": "max_over_time(process_runtime_dotnet_thread_pool_queue_length{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"}[$__rate_interval])",
           "instant": false,
-          "legendFormat": "Memory Usage",
+          "legendFormat": "Thread Pool Queue Length",
           "range": true,
           "refId": "A"
         }
