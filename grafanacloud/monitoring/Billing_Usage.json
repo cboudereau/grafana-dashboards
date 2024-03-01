@@ -54,7 +54,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.0-66955"
+      "version": "11.0.0-67429"
     },
     {
       "type": "datasource",
@@ -103,9 +103,9 @@
       }
     ]
   },
-  "editable": false,
+  "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 2,
+  "graphTooltip": 1,
   "id": null,
   "links": [
     {
@@ -172,12 +172,146 @@
   "liveNow": false,
   "panels": [
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-USAGE}"
+      },
+      "description": "Negative Delta: usage > commit per month",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [],
+          "mappings": [],
+          "noValue": "$0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "prefix:$"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage per month"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Committed per month"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 60,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0-67429",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-USAGE}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(grafanacloud_org_total_overage)",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "Usage per month",
+          "range": true,
+          "refId": "TotalPerMonth",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-USAGE}"
+          },
+          "editorMode": "code",
+          "expr": "sum(grafanacloud_org_spend_commit_credit_total / 12)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "Committed per month",
+          "range": true,
+          "refId": "CommittedPerMonth"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "${DS_EXPRESSION}"
+          },
+          "expression": "$CommittedPerMonth - $TotalPerMonth",
+          "hide": false,
+          "refId": "Delta",
+          "type": "math"
+        }
+      ],
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "id": 42,
       "panels": [],
@@ -193,7 +327,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 5
       },
       "id": 43,
       "options": {
@@ -216,7 +350,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 8
       },
       "id": 41,
       "panels": [],
@@ -232,7 +366,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 5
+        "y": 9
       },
       "id": 38,
       "options": {
@@ -265,7 +399,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 5
+        "y": 9
       },
       "id": 40,
       "options": {
@@ -295,7 +429,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 17
       },
       "id": 46,
       "panels": [],
@@ -351,8 +485,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -368,7 +501,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 18
       },
       "id": 47,
       "options": {
@@ -451,8 +584,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -468,7 +600,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 18
       },
       "id": 48,
       "options": {
@@ -551,8 +683,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -568,7 +699,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 25
       },
       "id": 49,
       "options": {
@@ -651,8 +782,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -685,7 +815,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 25
       },
       "id": 54,
       "options": {
@@ -759,7 +889,7 @@
         {
           "datasource": {
             "type": "__expr__",
-            "uid": "${DS_GRAFANACLOUD-PROM}"
+            "uid": "${DS_EXPRESSION}"
           },
           "expression": "$TenantActiveUsers/$AllActiveUsers*$AdditionalUsageAmount",
           "hide": true,
@@ -789,7 +919,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 47
       },
       "id": 9,
       "panels": [],
@@ -838,6 +968,7 @@
               "mode": "off"
             }
           },
+          "fieldMinMax": false,
           "links": [],
           "mappings": [],
           "noValue": "$0",
@@ -845,12 +976,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgb(150, 150, 150)",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "green",
-                "value": 1
+                "value": 0
               }
             ]
           },
@@ -860,24 +990,64 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Last month spend commit balance"
+              "options": "Delta"
             },
             "properties": [
               {
-                "id": "custom.axisPlacement",
-                "value": "right"
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "Initial spend committed"
+              "options": "Committed per month"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage per month"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Initial Commit"
             },
             "properties": [
               {
                 "id": "custom.axisPlacement",
                 "value": "right"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
               }
             ]
           }
@@ -887,13 +1057,18 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 44
+        "y": 48
       },
       "id": 8,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "lastNotNull",
+            "min",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -902,7 +1077,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.2.0-60477",
+      "pluginVersion": "11.0.0-67429",
       "targets": [
         {
           "datasource": {
@@ -910,17 +1085,17 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "delta(grafanacloud_org_total_overage[24h])",
+          "editorMode": "code",
+          "expr": "sum(grafanacloud_org_total_overage)",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "Total additional usage",
+          "legendFormat": "Usage per month",
           "range": true,
-          "refId": "A",
+          "refId": "TotalPerMonth",
           "useBackend": false
         },
         {
@@ -929,14 +1104,24 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "delta(grafanacloud_org_spend_commit_credit_total[24h])",
+          "expr": "sum(grafanacloud_org_spend_commit_credit_total / 12)",
           "format": "time_series",
-          "hide": true,
+          "hide": false,
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "Initial spend committed",
+          "legendFormat": "Committed per month",
           "range": true,
-          "refId": "B"
+          "refId": "CommittedPerMonth"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "${DS_EXPRESSION}"
+          },
+          "expression": "$CommittedPerMonth - $TotalPerMonth",
+          "hide": false,
+          "refId": "Delta",
+          "type": "math"
         },
         {
           "datasource": {
@@ -944,28 +1129,12 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "-delta(grafanacloud_org_spend_commit_balance_total[24h])",
-          "format": "time_series",
-          "hide": true,
+          "expr": "grafanacloud_org_spend_commit_credit_total",
+          "hide": false,
           "instant": false,
-          "intervalFactor": 1,
-          "legendFormat": "Last month spend commit balance",
+          "legendFormat": "Initial Commit",
           "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_GRAFANACLOUD-USAGE}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "delta(grafanacloud_org_total_overage[24h])+delta(grafanacloud_org_spend_commit_balance_total[24h])",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "D"
+          "refId": "A"
         }
       ],
       "title": "Total Billable Overall Usage",
@@ -977,7 +1146,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 56
       },
       "id": 15,
       "panels": [],
@@ -1031,8 +1200,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1048,7 +1216,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 53
+        "y": 57
       },
       "id": 20,
       "links": [
@@ -1142,8 +1310,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1159,7 +1326,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 53
+        "y": 57
       },
       "id": 44,
       "options": {
@@ -1259,7 +1426,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 61
+        "y": 65
       },
       "id": 16,
       "options": {
@@ -1362,7 +1529,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 61
+        "y": 65
       },
       "id": 45,
       "options": {
@@ -1461,7 +1628,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 73
       },
       "id": 37,
       "options": {
@@ -1561,7 +1728,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 73
       },
       "id": 25,
       "options": {
@@ -1607,7 +1774,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 78
+        "y": 82
       },
       "id": 14,
       "panels": [],
@@ -1679,7 +1846,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 79
+        "y": 83
       },
       "id": 24,
       "interval": "30ms",
@@ -1701,7 +1868,7 @@
           }
         ]
       },
-      "pluginVersion": "10.4.0-66955",
+      "pluginVersion": "11.0.0-67429",
       "targets": [
         {
           "datasource": {
@@ -1748,7 +1915,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 87
+        "y": 91
       },
       "id": 35,
       "panels": [],
@@ -1817,7 +1984,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 92
       },
       "id": 34,
       "options": {
@@ -1844,8 +2011,9 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "builder",
-          "expr": "count by(folderName, dashboardName) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
-          "legendFormat": "{{folderName}} / {{dashboardName}}",
+          "expr": "count by(folderName, dashboardName, instance_id) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
+          "hide": false,
+          "legendFormat": "{{instance_id}} / {{folderName}} / {{dashboardName}}",
           "queryType": "range",
           "refId": "A"
         },
@@ -1855,19 +2023,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "builder",
-          "expr": "count by(dashboardName, username) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
-          "hide": true,
-          "legendFormat": "{{labels.username}}",
-          "queryType": "range",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
-          },
-          "editorMode": "builder",
-          "expr": "count by(folderName, dashboardName, username) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
+          "expr": "count by(folderName, dashboardName, username, instance_id) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
           "hide": true,
           "legendFormat": "[{{username}}] {{folderName}} / {{dashboardName}}",
           "queryType": "range",
@@ -1883,7 +2039,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 99
+        "y": 103
       },
       "id": 29,
       "panels": [
@@ -2377,7 +2533,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 104
       },
       "id": 5,
       "panels": [
@@ -2935,7 +3091,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 101
+        "y": 105
       },
       "id": 11,
       "panels": [
@@ -3152,7 +3308,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 102
+        "y": 106
       },
       "id": 18,
       "panels": [
@@ -3167,11 +3323,11 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
-                "axisShow": false,
                 "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 10,
@@ -3219,7 +3375,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 82
+            "y": 107
           },
           "id": 19,
           "links": [
@@ -3273,7 +3429,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 103
+        "y": 107
       },
       "id": 26,
       "panels": [
@@ -3387,7 +3543,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 104
+        "y": 108
       },
       "id": 21,
       "panels": [
@@ -3567,6 +3723,7 @@
       "type": "row"
     }
   ],
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [
     "billing",
@@ -3611,6 +3768,6 @@
   "timezone": "",
   "title": "GrafanaCloud Monitoring / Billing / Usage",
   "uid": "grafanacloud-monitoring",
-  "version": 120,
+  "version": 121,
   "weekStart": ""
 }
