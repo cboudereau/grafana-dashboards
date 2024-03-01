@@ -110,6 +110,30 @@
   "links": [
     {
       "asDropdown": false,
+      "icon": "cloud",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "github",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://github.com/cboudereau/grafana-dashboards/tree/main/grafanacloud/monitoring"
+    },
+    {
+      "asDropdown": false,
+      "icon": "dashboard",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "grafana.com",
+      "tooltip": "grafana.com dashboard",
+      "type": "link",
+      "url": "https://grafana.com/grafana/dashboards/20492"
+    },
+    {
+      "asDropdown": false,
       "icon": "dashboard",
       "includeVars": false,
       "keepTime": true,
