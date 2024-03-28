@@ -1,4 +1,4 @@
-# ApiGateway
+# API Gateway
 
 Reference: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-metrics-and-dimensions.html
 
