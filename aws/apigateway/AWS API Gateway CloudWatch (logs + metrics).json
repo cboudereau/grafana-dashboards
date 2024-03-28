@@ -925,7 +925,7 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "AWS API Gateway CloudWatch (logs + metrics)",
-  "uid": "adec1f9s0dyiod",
+  "uid": "aws-api-gateway-cloudwatch-logs-metrics",
   "version": 29,
   "weekStart": ""
 }
