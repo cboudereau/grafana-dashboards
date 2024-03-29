@@ -54,7 +54,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.0.0-68547"
+      "version": "11.0.0-68643"
     },
     {
       "type": "datasource",
@@ -256,7 +256,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-68547",
+      "pluginVersion": "11.0.0-68643",
       "targets": [
         {
           "datasource": {
@@ -498,8 +498,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -599,8 +598,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1009,21 +1007,6 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Delta"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "Committed per month"
             },
             "properties": [
@@ -1065,6 +1048,21 @@
                 "id": "color",
                 "value": {
                   "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Balance.*/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
                   "mode": "fixed"
                 }
               }
@@ -1124,7 +1122,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(grafanacloud_org_spend_commit_credit_total / 12)",
+          "expr": "scalar(grafanacloud_org_spend_commit_balance_total)\r\n/\r\n(\r\n    (year(grafanacloud_org_contract_end_date) - scalar(year(vector(time())))) * 12 \r\n    + \r\n    (month(grafanacloud_org_contract_end_date) - scalar(month(vector(time()))))\r\n    + 1\r\n)\r\n",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1140,7 +1138,7 @@
           },
           "expression": "$CommittedPerMonth - $TotalPerMonth",
           "hide": false,
-          "refId": "Delta",
+          "refId": "Balance",
           "type": "math"
         },
         {
@@ -1154,7 +1152,7 @@
           "instant": false,
           "legendFormat": "Initial Commit",
           "range": true,
-          "refId": "A"
+          "refId": "InitialCommit"
         }
       ],
       "title": "Total Billable Overall Usage",
@@ -1894,7 +1892,7 @@
           }
         ]
       },
-      "pluginVersion": "11.0.0-68547",
+      "pluginVersion": "11.0.0-68643",
       "targets": [
         {
           "datasource": {
@@ -2119,7 +2117,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-68547",
+      "pluginVersion": "11.0.0-68643",
       "targets": [
         {
           "datasource": {
@@ -3616,7 +3614,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.0.0-68547",
+      "pluginVersion": "11.0.0-68643",
       "targets": [
         {
           "datasource": {
@@ -3721,7 +3719,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-68547",
+      "pluginVersion": "11.0.0-68643",
       "targets": [
         {
           "datasource": {
@@ -3786,6 +3784,6 @@
   "timezone": "",
   "title": "GrafanaCloud Monitoring / Billing / Usage",
   "uid": "grafanacloud-monitoring",
-  "version": 122,
+  "version": 123,
   "weekStart": ""
 }
