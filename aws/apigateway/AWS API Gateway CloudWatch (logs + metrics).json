@@ -2,8 +2,8 @@
   "__inputs": [
     {
       "name": "DS_CW",
-      "label": "cw",
-      "description": "",
+      "label": "cloudwatch",
+      "description": "CloudWatch datasource",
       "type": "datasource",
       "pluginId": "cloudwatch",
       "pluginName": "CloudWatch"
@@ -926,7 +926,9 @@
   "timezone": "browser",
   "title": "AWS API Gateway CloudWatch (logs + metrics)",
   "uid": "aws-api-gateway-cloudwatch-logs-metrics",
+  "slug": "aws-api-gateway-cloudwatch-logs-metrics",
   "version": 29,
+  "weekStart": "",
   "gnetId": 20796,
-  "weekStart": ""
+  "description": "AWS API Gateway logs and metrics"
 }
