@@ -1,5 +1,7 @@
 # OpenTelemetry JVM Spring Boot dashboard
 
+![overview](./overview.png)
+
 Metrics are sent via micrometer-otlp.
 Logs are sent via the opentelemetry exporter.
 
@@ -16,6 +18,9 @@ A complete [live demo](https://o11y-weekly.github.io/2024-01-31_OpenTelemetry_Lo
 ## RED
 ![RED](./top_10_2.png)
 
+## Logs
+![Logs](./top_10_8.png)
+
 ## Saturation
 ![Saturation](./top_10_3.png)
 
@@ -26,6 +31,3 @@ A complete [live demo](https://o11y-weekly.github.io/2024-01-31_OpenTelemetry_Lo
 ## JVM Garbage Collection and Memory
 ![JVM Garbage Collection and Memory part1](./top_10_6.png)
 ![JVM Garbage Collection and Memory part2](./top_10_7.png)
-
-## Logs
-![Logs](./top_10_8.png)
