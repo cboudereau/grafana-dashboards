@@ -51,10 +51,16 @@
       "version": ""
     },
     {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.0.0-68643"
+      "version": "11.1.0-69622"
     },
     {
       "type": "datasource",
@@ -108,30 +114,6 @@
   "graphTooltip": 1,
   "id": null,
   "links": [
-    {
-      "asDropdown": false,
-      "icon": "cloud",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "github",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://github.com/cboudereau/grafana-dashboards/tree/main/grafanacloud/monitoring"
-    },
-    {
-      "asDropdown": false,
-      "icon": "dashboard",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "grafana.com",
-      "tooltip": "grafana.com dashboard",
-      "type": "link",
-      "url": "https://grafana.com/grafana/dashboards/20492"
-    },
     {
       "asDropdown": false,
       "icon": "dashboard",
@@ -256,7 +238,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-68643",
+      "pluginVersion": "11.1.0-69622",
       "targets": [
         {
           "datasource": {
@@ -265,7 +247,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(grafanacloud_org_total_overage)",
+          "expr": "sum(grafanacloud_org_total_overage{org_id=\"${org_id}\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -283,7 +265,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "scalar(grafanacloud_org_spend_commit_balance_total)\r\n/\r\n(\r\n    (year(grafanacloud_org_contract_end_date) - scalar(year(vector(time())))) * 12 \r\n    + \r\n    (month(grafanacloud_org_contract_end_date) - scalar(month(vector(time()))))\r\n    + 1\r\n)\r\n",
+          "expr": "scalar(grafanacloud_org_spend_commit_balance_total{org_id=\"${org_id}\"})\r\n/\r\n(\r\n    (year(grafanacloud_org_contract_end_date{org_id=\"${org_id}\"}) - scalar(year(vector(time())))) * 12 \r\n    + \r\n    (month(grafanacloud_org_contract_end_date{org_id=\"${org_id}\"}) - scalar(month(vector(time()))))\r\n    + 1\r\n)\r\n",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -308,7 +290,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "(\r\n    scalar(grafanacloud_org_spend_commit_balance_total)\r\n    /\r\n    (\r\n        (year(grafanacloud_org_contract_end_date) - scalar(year(vector(time())))) * 12 \r\n        + \r\n        (month(grafanacloud_org_contract_end_date) - scalar(month(vector(time()))))\r\n        + 1\r\n    )\r\n)\r\n- \r\nscalar(grafanacloud_org_total_overage)",
+          "expr": "(\r\n    scalar(grafanacloud_org_spend_commit_balance_total{org_id=\"${org_id}\"})\r\n    /\r\n    (\r\n        (year(grafanacloud_org_contract_end_date{org_id=\"${org_id}\"}) - scalar(year(vector(time())))) * 12 \r\n        + \r\n        (month(grafanacloud_org_contract_end_date{org_id=\"${org_id}\"}) - scalar(month(vector(time()))))\r\n        + 1\r\n    )\r\n)\r\n- \r\nscalar(grafanacloud_org_total_overage{org_id=\"${org_id}\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "Balance",
@@ -456,6 +438,106 @@
         "type": "prometheus",
         "uid": "${DS_GRAFANACLOUD-USAGE}"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "max": 6,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 18
+      },
+      "id": 76,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0-69622",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-USAGE}"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc(\n  max by(id, name) (\n    60 * grafanacloud_instance_samples_per_second{org_id=\"${org_id}\"}\n    / grafanacloud_instance_active_series{org_id=\"${org_id}\"}\n\n    * on(id) group_left(name) grafanacloud_instance_info{org_id=\"${org_id}\", name=~\"${tenant:value}\"}\n  )\n)\n",
+          "format": "table",
+          "instant": true,
+          "refId": "Average DPM per series"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-USAGE}"
+          },
+          "expr": "scalar(grafanacloud_org_metrics_included_dpm_per_series{org_id=\"$org_id\"})",
+          "format": "table",
+          "instant": true,
+          "refId": "Included DPM per series"
+        }
+      ],
+      "title": "Highest Metrics DPM",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Value #Average DPM per series"
+            },
+            "configRefId": "Included DPM per series",
+            "mappings": [
+              {
+                "fieldName": "Time",
+                "handlerKey": "__ignore"
+              },
+              {
+                "fieldName": "Value #Included DPM per series",
+                "handlerKey": "threshold1"
+              }
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "id": true
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-USAGE}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -498,7 +580,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -512,8 +595,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 0,
+        "w": 10,
+        "x": 4,
         "y": 18
       },
       "id": 47,
@@ -523,7 +606,7 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true,
           "sortBy": "Last *",
           "sortDesc": true
@@ -541,7 +624,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "max(grafanacloud_instance_billable_usage) by (id) / ignoring(id) group_left() max(grafanacloud_org_metrics_billable_series) by (id) * ignoring(id,org_id,cluster) group_left() avg without(monetary) (grafanacloud_org_metrics_overage) * on (id) group_left(name) max by(id, name) (grafanacloud_instance_info{name=~\"${tenant:value}\"})",
+          "expr": "max(grafanacloud_instance_billable_usage{org_id=\"${org_id}\"}) by (id) / ignoring(id) group_left() max(grafanacloud_org_metrics_billable_series{org_id=\"${org_id}\"}) by (id) * ignoring(id,org_id,cluster) group_left() avg without(monetary) (grafanacloud_org_metrics_overage{org_id=\"${org_id}\"}) * on (id) group_left(name) max by(id, name) (grafanacloud_instance_info{name=~\"${tenant:value}\", org_id=\"${org_id}\"})",
           "instant": false,
           "legendFormat": "{{ name }}",
           "range": true,
@@ -598,7 +681,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -612,109 +696,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
+        "w": 10,
+        "x": 14,
         "y": 18
-      },
-      "id": 48,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "sortBy": "Last *",
-          "sortDesc": true
-        },
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_GRAFANACLOUD-USAGE}"
-          },
-          "editorMode": "code",
-          "expr": "max(grafanacloud_logs_instance_usage) by (id) / ignoring(id) group_left() max(grafanacloud_org_logs_usage) by (id) * ignoring(id,org_id,cluster) group_left() avg without(monetary) (grafanacloud_org_logs_overage) * on (id) group_left(name) max by(id, name) (grafanacloud_logs_instance_info{name=~\"${tenant:value}\"})",
-          "instant": false,
-          "legendFormat": "{{ name }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Logs",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_GRAFANACLOUD-USAGE}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "currencyUSD"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 25
       },
       "id": 49,
       "options": {
@@ -723,7 +707,7 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true,
           "sortBy": "Last *",
           "sortDesc": true
@@ -741,7 +725,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "max(grafanacloud_traces_instance_usage) by (id) / ignoring(id) group_left() max(grafanacloud_org_traces_usage) by (id) * ignoring(id,org_id,cluster) group_left() avg without(monetary) (grafanacloud_org_traces_overage) * on (id) group_left(name) max by(id, name) (grafanacloud_traces_instance_info{name=~\"${tenant:value}\"})",
+          "expr": "max(grafanacloud_traces_instance_usage{org_id=\"${org_id}\"}) by (id) / ignoring(id) group_left() max(grafanacloud_org_traces_usage{org_id=\"${org_id}\"}) by (id) * ignoring(id,org_id,cluster) group_left() avg without(monetary) (grafanacloud_org_traces_overage{org_id=\"${org_id}\"}) * on (id) group_left(name) max by(id, name) (grafanacloud_traces_instance_info{name=~\"${tenant:value}\", org_id=\"${org_id}\"})",
           "instant": false,
           "legendFormat": "{{ name }}",
           "range": true,
@@ -798,7 +782,109 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 48,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-USAGE}"
+          },
+          "editorMode": "code",
+          "expr": "max(grafanacloud_logs_instance_usage{org_id=\"${org_id}\"}) by (id) / ignoring(id) group_left() max(grafanacloud_org_logs_usage{org_id=\"${org_id}\"}) by (id) * ignoring(id,org_id,cluster) group_left() avg without(monetary) (grafanacloud_org_logs_overage{org_id=\"${org_id}\"}) * on (id) group_left(name) max by(id, name) (grafanacloud_logs_instance_info{name=~\"${tenant:value}\", org_id=\"${org_id}\"})",
+          "instant": false,
+          "legendFormat": "{{ name }}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Logs",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-USAGE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -840,7 +926,7 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true,
           "sortBy": "Last *",
           "sortDesc": true
@@ -858,7 +944,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(sum(grafanacloud_grafana_instance_active_user_count) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{name=~\"${tenant:value}\"}) by (name)",
+          "expr": "sum(sum(grafanacloud_grafana_instance_active_user_count{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{name=~\"${tenant:value}\", org_id=\"${org_id}\"}) by (name)",
           "instant": false,
           "legendFormat": "{{ name }}",
           "range": true,
@@ -870,7 +956,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "avg without(monetary) (grafanacloud_org_grafana_overage)",
+          "expr": "avg without(monetary) (grafanacloud_org_grafana_overage{org_id=\"${org_id}\"})",
           "hide": true,
           "instant": false,
           "legendFormat": "__auto",
@@ -883,7 +969,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(sum(sum(grafanacloud_grafana_instance_active_user_count) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{name=~\"${tenant:value}\"}) by (name))",
+          "expr": "sum(sum(sum(grafanacloud_grafana_instance_active_user_count{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{name=~\"${tenant:value}\", org_id=\"${org_id}\"}) by (name))",
           "hide": true,
           "instant": false,
           "legendFormat": "tenant active users",
@@ -896,7 +982,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(sum(sum(grafanacloud_grafana_instance_active_user_count) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info) by (name))",
+          "expr": "sum(sum(sum(grafanacloud_grafana_instance_active_user_count{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{org_id=\"${org_id}\"}) by (name))",
           "hide": true,
           "instant": false,
           "legendFormat": "all active users",
@@ -919,7 +1005,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(sum(sum(grafanacloud_grafana_instance_active_user_count) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{name=~\"${tenant:value}\"}) by (name))\r\n/\r\nsum(sum(sum(grafanacloud_grafana_instance_active_user_count) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info) by (name))\r\n*\r\nsum(avg without(monetary) (grafanacloud_org_grafana_overage))",
+          "expr": "sum(sum(sum(grafanacloud_grafana_instance_active_user_count{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{name=~\"${tenant:value}\", org_id=\"${org_id}\"}) by (name))\r\n/\r\nsum(sum(sum(grafanacloud_grafana_instance_active_user_count{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_grafana_instance_info{org_id=\"${org_id}\"}) by (name))\r\n*\r\nsum(avg without(monetary) (grafanacloud_org_grafana_overage{org_id=\"${org_id}\"}))",
           "hide": false,
           "instant": false,
           "legendFormat": "Billable Users",
@@ -936,7 +1022,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 32
       },
       "id": 9,
       "panels": [],
@@ -993,7 +1079,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "green",
@@ -1074,7 +1161,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 33
       },
       "id": 8,
       "options": {
@@ -1104,7 +1191,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(grafanacloud_org_total_overage)",
+          "expr": "sum(grafanacloud_org_total_overage{org_id=\"${org_id}\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -1122,7 +1209,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "scalar(grafanacloud_org_spend_commit_balance_total)\r\n/\r\n(\r\n    (year(grafanacloud_org_contract_end_date) - scalar(year(vector(time())))) * 12 \r\n    + \r\n    (month(grafanacloud_org_contract_end_date) - scalar(month(vector(time()))))\r\n    + 1\r\n)\r\n",
+          "expr": "scalar(grafanacloud_org_spend_commit_balance_total{org_id=\"${org_id}\"})\r\n/\r\n(\r\n    (year(grafanacloud_org_contract_end_date{org_id=\"${org_id}\"}) - scalar(year(vector(time())))) * 12 \r\n    + \r\n    (month(grafanacloud_org_contract_end_date{org_id=\"${org_id}\"}) - scalar(month(vector(time()))))\r\n    + 1\r\n)\r\n",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1147,7 +1234,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "grafanacloud_org_spend_commit_credit_total",
+          "expr": "grafanacloud_org_spend_commit_credit_total{org_id=\"${org_id}\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "Initial Commit",
@@ -1164,7 +1251,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 71
+        "y": 41
       },
       "id": 15,
       "panels": [],
@@ -1234,7 +1321,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 72
+        "y": 42
       },
       "id": 20,
       "links": [
@@ -1270,7 +1357,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(max(grafanacloud_instance_samples_discarded_per_second) by (id, reason)) by (id, reason) * on(id) group_left(name) grafanacloud_instance_info",
+          "expr": "sum(max(grafanacloud_instance_samples_discarded_per_second{org_id=\"${org_id}\"}) by (id, reason)) by (id, reason) * on(id) group_left(name) grafanacloud_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1345,7 +1432,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 72
+        "y": 42
       },
       "id": 44,
       "options": {
@@ -1374,7 +1461,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "max(grafanacloud_instance_samples_per_second{} * 60) by (id) * on(id) group_left(name) grafanacloud_instance_info{}",
+          "expr": "max(grafanacloud_instance_samples_per_second{org_id=\"${org_id}\"} * 60) by (id) * on(id) group_left(name) grafanacloud_instance_info{org_id=\"${org_id}\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1446,7 +1533,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 80
+        "y": 50
       },
       "id": 16,
       "options": {
@@ -1475,7 +1562,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(grafanacloud_logs_instance_samples_discarded_per_second) by (id, reason) * on(id) group_left(name) grafanacloud_logs_instance_info",
+          "expr": "sum(grafanacloud_logs_instance_samples_discarded_per_second{org_id=\"${org_id}\"}) by (id, reason) * on(id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1550,7 +1637,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 80
+        "y": 50
       },
       "id": 45,
       "options": {
@@ -1579,7 +1666,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(grafanacloud_logs_instance_bytes_received_per_second{}) by (id) * on(id) group_left(name) grafanacloud_logs_instance_info{}",
+          "expr": "sum(grafanacloud_logs_instance_bytes_received_per_second{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1650,7 +1737,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 88
+        "y": 58
       },
       "id": 37,
       "options": {
@@ -1678,7 +1765,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "(sort_desc(\r\n  sum_over_time(\r\n    sum by (id) (\r\n      grafanacloud_logs_instance_query_bytes:rate5m\r\n    ) [$__range:1m]\r\n  ) > 0) /\r\n  (sum_over_time(\r\n    sum by (id) (\r\n      grafanacloud_logs_instance_billable_bytes_received_per_second\r\n    ) [$__range:1m]\r\n  ) > 0)\r\n) * on(id) group_left(name) grafanacloud_logs_instance_info\r\n",
+          "expr": "(sort_desc(\r\n  sum_over_time(\r\n    sum by (id) (\r\n      grafanacloud_logs_instance_query_bytes:rate5m{org_id=\"${org_id}\"}\r\n    ) [$__range:1m]\r\n  ) > 0) /\r\n  (sum_over_time(\r\n    sum by (id) (\r\n      grafanacloud_logs_instance_billable_bytes_received_per_second{org_id=\"${org_id}\"}\r\n    ) [$__range:1m]\r\n  ) > 0)\r\n) * on(id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}\r\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1751,7 +1838,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 88
+        "y": 58
       },
       "id": 25,
       "options": {
@@ -1780,7 +1867,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sum(grafanacloud_traces_instance_discarded_spans_total:rate5m) by (id, reason) * on(id) group_left(name) grafanacloud_traces_instance_info",
+          "expr": "sum(grafanacloud_traces_instance_discarded_spans_total:rate5m{org_id=\"${org_id}\"}) by (id, reason) * on(id) group_left(name) grafanacloud_traces_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1798,7 +1885,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 97
+        "y": 67
       },
       "id": 14,
       "panels": [],
@@ -1870,7 +1957,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 98
+        "y": 68
       },
       "id": 24,
       "interval": "30ms",
@@ -1892,7 +1979,7 @@
           }
         ]
       },
-      "pluginVersion": "11.0.0-68643",
+      "pluginVersion": "11.1.0-69622",
       "targets": [
         {
           "datasource": {
@@ -1900,7 +1987,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "code",
-          "expr": "topk(20, sum by (dashboardName, folderName) (\n    count_over_time({instance_type=\"grafana\"} \n        |= \"data-request\" |~ `error=\".+\"` != \"dashboardId=0\"\n        | regexp `folderName=(?P<folderName>.+) dashboardName=(?P<dashboardName>.+) dashboardId=`\n        | label_format dashboardName=`{{replace \"\\\"\" \"\" .dashboardName}}`\n        | label_format folderName=`{{replace \"\\\"\" \"\" .folderName}}`\n[$__range])))",
+          "expr": "topk(20, sum by (dashboardName, folderName) (\n    count_over_time({instance_type=\"grafana\", org_id=\"${org_id}\"} \n        |= \"data-request\" |~ `error=\".+\"` != \"dashboardId=0\"\n        | regexp `folderName=(?P<folderName>.+) dashboardName=(?P<dashboardName>.+) dashboardId=`\n        | label_format dashboardName=`{{replace \"\\\"\" \"\" .dashboardName}}`\n        | label_format folderName=`{{replace \"\\\"\" \"\" .folderName}}`\n[$__range])))",
           "legendFormat": "{{error}}",
           "queryType": "instant",
           "refId": "A"
@@ -1939,7 +2026,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 106
+        "y": 76
       },
       "id": 35,
       "panels": [],
@@ -2008,7 +2095,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 107
+        "y": 77
       },
       "id": 34,
       "options": {
@@ -2036,7 +2123,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "builder",
-          "expr": "count by(folderName, dashboardName, instance_id) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
+          "expr": "count by(folderName, dashboardName, instance_id) (rate({instance_type=\"grafana\", org_id=\"$org_id\"} | logfmt [$__auto]))",
           "hide": false,
           "legendFormat": "{{instance_id}} / {{folderName}} / {{dashboardName}}",
           "queryType": "range",
@@ -2048,7 +2135,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "builder",
-          "expr": "count by(folderName, dashboardName, username, instance_id) (rate({instance_type=\"grafana\"} | logfmt [$__auto]))",
+          "expr": "count by(folderName, dashboardName, username, instance_id) (rate({instance_type=\"grafana\", org_id=\"$org_id\"} | logfmt [$__auto]))",
           "hide": true,
           "legendFormat": "[{{username}}] {{folderName}} / {{dashboardName}}",
           "queryType": "range",
@@ -2064,7 +2151,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 118
+        "y": 88
       },
       "id": 29,
       "panels": [],
@@ -2098,7 +2185,7 @@
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 119
+        "y": 89
       },
       "id": 30,
       "options": {
@@ -2117,14 +2204,15 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-68643",
+      "pluginVersion": "11.1.0-69622",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_grafana_billable_users",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_grafana_billable_users{org_id=\"${org_id}\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 2,
@@ -2136,7 +2224,8 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_billable_users_grafana",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_billable_users_grafana{org_id=\"${org_id}\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 2,
@@ -2148,7 +2237,8 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_billable_users_oncall",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_billable_users_oncall{org_id=\"${org_id}\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 2,
@@ -2262,7 +2352,7 @@
         "h": 8,
         "w": 9,
         "x": 6,
-        "y": 119
+        "y": 89
       },
       "id": 32,
       "options": {
@@ -2285,10 +2375,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_grafana_billable_users",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_grafana_billable_users{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Billable Users",
+          "range": true,
           "refId": "A"
         },
         {
@@ -2296,10 +2388,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_grafana_overage",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_grafana_overage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount",
+          "range": true,
           "refId": "B"
         },
         {
@@ -2307,10 +2401,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_grafana_included_users",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_grafana_included_users{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Included Users",
+          "range": true,
           "refId": "C"
         }
       ],
@@ -2409,7 +2505,7 @@
         "h": 8,
         "w": 9,
         "x": 15,
-        "y": 119
+        "y": 89
       },
       "id": 33,
       "options": {
@@ -2432,10 +2528,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_billable_users_grafana",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_billable_users_grafana{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Grafana Users",
+          "range": true,
           "refId": "A"
         },
         {
@@ -2443,10 +2541,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_billable_users_oncall",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_billable_users_oncall{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "OnCall users",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -2518,7 +2618,7 @@
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 123
+        "y": 93
       },
       "id": 31,
       "options": {
@@ -2542,7 +2642,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "grafanacloud_org_grafana_overage",
+          "expr": "grafanacloud_org_grafana_overage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -2560,7 +2660,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 127
+        "y": 97
       },
       "id": 5,
       "panels": [],
@@ -2670,7 +2770,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 128
+        "y": 98
       },
       "id": 7,
       "options": {
@@ -2694,7 +2794,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "delta(grafanacloud_org_logs_usage[24h])",
+          "expr": "delta(grafanacloud_org_logs_usage{org_id=\"${org_id}\"}[24h])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Billable Usage",
@@ -2707,7 +2807,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "delta(grafanacloud_org_logs_overage[24h])",
+          "expr": "delta(grafanacloud_org_logs_overage{org_id=\"${org_id}\"}[24h])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount",
@@ -2720,7 +2820,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "delta(grafanacloud_org_logs_included_usage[24h])",
+          "expr": "delta(grafanacloud_org_logs_included_usage{org_id=\"${org_id}\"}[24h])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Included Usage",
@@ -2732,10 +2832,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "max(grafanacloud_logs_instance_usage) by (id) / ignoring(id) group_left() max(grafanacloud_org_logs_usage) by (id) * ignoring(id,org_id,cluster) group_left() grafanacloud_org_logs_overage * on (id) group_left(name) grafanacloud_logs_instance_info",
+          "editorMode": "code",
+          "expr": "max(grafanacloud_logs_instance_usage{org_id=\"${org_id}\"}) by (id) / ignoring(id) group_left() max(grafanacloud_org_logs_usage{org_id=\"${org_id}\"}) by (id) * ignoring(id,org_id,cluster) group_left() grafanacloud_org_logs_overage{org_id=\"${org_id}\"} * on (id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount - {{ name }}",
+          "range": true,
           "refId": "D"
         }
       ],
@@ -2845,7 +2947,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 128
+        "y": 98
       },
       "id": 2,
       "options": {
@@ -2868,10 +2970,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_metrics_billable_series",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_metrics_billable_series{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Billable Series",
+          "range": true,
           "refId": "A"
         },
         {
@@ -2879,10 +2983,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_metrics_overage",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_metrics_overage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount",
+          "range": true,
           "refId": "B"
         },
         {
@@ -2890,10 +2996,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_metrics_included_series",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_metrics_included_series{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Included Series",
+          "range": true,
           "refId": "C"
         },
         {
@@ -2901,10 +3009,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_graphite_metrics_billable_series",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_graphite_metrics_billable_series{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Billable Graphite Series",
+          "range": true,
           "refId": "D"
         },
         {
@@ -2912,10 +3022,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_graphite_metrics_overage",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_graphite_metrics_overage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Graphite Usage Amount",
+          "range": true,
           "refId": "E"
         },
         {
@@ -2923,7 +3035,8 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_graphite_metrics_included_series",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_graphite_metrics_included_series{org_id=\"${org_id}\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 2,
@@ -2935,10 +3048,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "max(grafanacloud_instance_billable_usage) by (id) / ignoring(id) group_left() max(grafanacloud_org_metrics_billable_series) by (id) * ignoring(id,org_id,cluster) group_left() grafanacloud_org_metrics_overage * on (id) group_left(name) grafanacloud_instance_info",
+          "editorMode": "code",
+          "expr": "max(grafanacloud_instance_billable_usage{org_id=\"${org_id}\"}) by (id) / ignoring(id) group_left() max(grafanacloud_org_metrics_billable_series{org_id=\"${org_id}\"}) by (id) * ignoring(id,org_id,cluster) group_left() grafanacloud_org_metrics_overage{org_id=\"${org_id}\"} * on (id) group_left(name) grafanacloud_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount - {{ name }}",
+          "range": true,
           "refId": "G"
         }
       ],
@@ -3048,7 +3163,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 128
+        "y": 98
       },
       "id": 6,
       "options": {
@@ -3071,10 +3186,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_traces_usage",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_traces_usage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Billable Usage",
+          "range": true,
           "refId": "A"
         },
         {
@@ -3082,10 +3199,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_traces_overage",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_traces_overage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount",
+          "range": true,
           "refId": "B"
         },
         {
@@ -3093,10 +3212,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_traces_included_usage",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_traces_included_usage{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Included Usage",
+          "range": true,
           "refId": "C"
         },
         {
@@ -3104,10 +3225,12 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "max(grafanacloud_traces_instance_usage) by (id) / ignoring(id) group_left() max(grafanacloud_org_traces_usage) by (id) * ignoring(id,org_id,cluster) group_left() grafanacloud_org_traces_overage * on (id) group_left(name) grafanacloud_traces_instance_info",
+          "editorMode": "code",
+          "expr": "max(grafanacloud_traces_instance_usage{org_id=\"${org_id}\"}) by (id) / ignoring(id) group_left() max(grafanacloud_org_traces_usage{org_id=\"${org_id}\"}) by (id) * ignoring(id,org_id,cluster) group_left() grafanacloud_org_traces_overage{org_id=\"${org_id}\"} * on (id) group_left(name) grafanacloud_traces_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Additional Usage Amount - {{ name }}",
+          "range": true,
           "refId": "D"
         }
       ],
@@ -3120,7 +3243,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 136
+        "y": 106
       },
       "id": 11,
       "panels": [],
@@ -3190,7 +3313,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 137
+        "y": 107
       },
       "id": 28,
       "options": {
@@ -3216,11 +3339,13 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "sum(grafanacloud_logs_instance_bytes_received_per_second) by (id) * on(id) group_left(name) grafanacloud_logs_instance_info",
+          "editorMode": "code",
+          "expr": "sum(grafanacloud_logs_instance_bytes_received_per_second{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -3290,7 +3415,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 137
+        "y": 107
       },
       "id": 17,
       "options": {
@@ -3317,11 +3442,13 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "sum(grafanacloud_logs_instance_query_bytes:rate5m) by (id) * on(id) group_left(name) grafanacloud_logs_instance_info",
+          "editorMode": "code",
+          "expr": "sum(grafanacloud_logs_instance_query_bytes:rate5m{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -3334,7 +3461,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 145
+        "y": 115
       },
       "id": 18,
       "panels": [],
@@ -3404,10 +3531,16 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 146
+        "y": 116
       },
       "id": 19,
-      "links": [],
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Cardinality Management",
+          "url": "./d/cardinality-management/cardinality-management-1-overview?orgId=1&refresh=15m"
+        }
+      ],
       "options": {
         "legend": {
           "calcs": [
@@ -3432,11 +3565,13 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "max(grafanacloud_instance_samples_per_second * 60) by (id) * on(id) group_left(name) grafanacloud_instance_info",
+          "editorMode": "code",
+          "expr": "max(grafanacloud_instance_samples_per_second{org_id=\"${org_id}\"} * 60) by (id) * on(id) group_left(name) grafanacloud_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -3449,7 +3584,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 154
+        "y": 124
       },
       "id": 26,
       "panels": [],
@@ -3519,7 +3654,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 155
+        "y": 125
       },
       "id": 27,
       "options": {
@@ -3545,11 +3680,13 @@
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "sum(grafanacloud_traces_instance_bytes_received_per_second) by (id) * on(id) group_left(name) grafanacloud_traces_instance_info",
+          "editorMode": "code",
+          "expr": "sum(grafanacloud_traces_instance_bytes_received_per_second{org_id=\"${org_id}\"}) by (id) * on(id) group_left(name) grafanacloud_traces_instance_info{org_id=\"${org_id}\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -3562,7 +3699,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 163
+        "y": 133
       },
       "id": 21,
       "panels": [],
@@ -3593,7 +3730,7 @@
         "h": 6,
         "w": 19,
         "x": 0,
-        "y": 164
+        "y": 134
       },
       "id": 22,
       "options": {
@@ -3614,7 +3751,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.0.0-68643",
+      "pluginVersion": "11.1.0-69622",
       "targets": [
         {
           "datasource": {
@@ -3622,7 +3759,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "sort_desc(\n  sum_over_time(\n    sum by (id) (\n      grafanacloud_logs_instance_query_bytes:rate5m\n    ) [$__range:1m]\n  ) /\n  sum_over_time(\n    sum by (id) (\n      grafanacloud_logs_instance_billable_bytes_received_per_second\n    ) [$__range:1m]\n  )\n) * on(id) group_left(name) grafanacloud_logs_instance_info\n",
+          "expr": "sort_desc(\n  sum_over_time(\n    sum by (id) (\n      grafanacloud_logs_instance_query_bytes:rate5m{org_id=\"${org_id}\"}\n    ) [$__range:1m]\n  ) /\n  sum_over_time(\n    sum by (id) (\n      grafanacloud_logs_instance_billable_bytes_received_per_second{org_id=\"${org_id}\"}\n    ) [$__range:1m]\n  )\n) * on(id) group_left(name) grafanacloud_logs_instance_info{org_id=\"${org_id}\"}\n",
           "format": "table",
           "instant": true,
           "legendFormat": "{{name}}",
@@ -3634,7 +3771,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
           "editorMode": "code",
-          "expr": "grafanacloud_org_logs_included_query_to_ingest_ratio",
+          "expr": "grafanacloud_org_logs_included_query_to_ingest_ratio{org_id=\"${org_id}\"}",
           "format": "table",
           "instant": true,
           "refId": "Included query to ingest ratio"
@@ -3700,7 +3837,7 @@
         "h": 6,
         "w": 5,
         "x": 19,
-        "y": 164
+        "y": 134
       },
       "id": 23,
       "options": {
@@ -3719,14 +3856,15 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-68643",
+      "pluginVersion": "11.1.0-69622",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_GRAFANACLOUD-USAGE}"
           },
-          "expr": "grafanacloud_org_logs_included_query_to_ingest_ratio",
+          "editorMode": "code",
+          "expr": "grafanacloud_org_logs_included_query_to_ingest_ratio{org_id=\"${org_id}\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 2,
@@ -3746,6 +3884,54 @@
   ],
   "templating": {
     "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-USAGE}"
+        },
+        "definition": "label_values(grafanacloud_org_info,org_slug)",
+        "hide": 1,
+        "includeAll": false,
+        "label": "Org",
+        "multi": false,
+        "name": "org_slug",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(grafanacloud_org_info,org_slug)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-USAGE}"
+        },
+        "definition": "label_values(grafanacloud_org_info{org_slug=\"$org_slug\"},org_id)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Org ID",
+        "multi": false,
+        "name": "org_id",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(grafanacloud_org_info{org_slug=\"$org_slug\"},org_id)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
       {
         "current": {
           "selected": true,
