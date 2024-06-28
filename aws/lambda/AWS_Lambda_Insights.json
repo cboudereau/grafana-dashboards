@@ -13,7 +13,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.0-65875"
+      "version": "11.2.0-72343"
     },
     {
       "type": "panel",
@@ -98,7 +98,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "dark-red",
+            "mode": "shades"
           },
           "custom": {
             "axisBorderShow": false,
@@ -148,8 +149,7 @@
               }
             ]
           },
-          "unit": "none",
-          "unitScale": true
+          "unit": "none"
         },
         "overrides": [
           {
@@ -206,7 +206,6 @@
         "y": 1
       },
       "id": 18,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -217,6 +216,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -281,11 +281,10 @@
         "y": 8
       },
       "id": 20,
-      "links": [],
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
-        "prettifyLogMessage": false,
+        "prettifyLogMessage": true,
         "showCommonLabels": false,
         "showLabels": false,
         "showTime": false,
@@ -306,7 +305,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, function_name, shutdown_reason, @message\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)\n| display  @timestamp, @message",
+          "expression": "fields @timestamp, function_name, shutdown_reason, @message\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)\n| display  @timestamp, shutdown_reason, @message",
           "functions": [],
           "group": {
             "filter": ""
@@ -360,7 +359,6 @@
         "y": 13
       },
       "id": 21,
-      "links": [],
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
@@ -385,7 +383,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message LIKE \"ERROR\"\n| display @timestamp, @message",
+          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message =~ /WARN|ERROR/\n| display @timestamp, @message",
           "functions": [],
           "group": {
             "filter": ""
@@ -466,12 +464,15 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 2,
-            "pointSize": 5,
+            "pointSize": 6,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
+            "showPoints": "always",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -497,52 +498,18 @@
               }
             ]
           },
-          "unit": "none",
-          "unitScale": true
+          "unit": "none"
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "Throttles Sum"
+              "options": "Global UnreservedConcurrentExecutions Maximum"
             },
             "properties": [
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Throttles_Average"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Throttles_Sum"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
-                }
+                "id": "custom.lineWidth",
+                "value": 0
               }
             ]
           }
@@ -555,7 +522,6 @@
         "y": 21
       },
       "id": 10,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -567,9 +533,10 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -624,7 +591,6 @@
             "filter": ""
           },
           "datasource": {
-            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {},
@@ -669,7 +635,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "dark-orange",
+            "mode": "shades"
           },
           "custom": {
             "axisBorderShow": false,
@@ -719,8 +686,7 @@
               }
             ]
           },
-          "unit": "none",
-          "unitScale": true
+          "unit": "none"
         },
         "overrides": [
           {
@@ -777,7 +743,6 @@
         "y": 21
       },
       "id": 9,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -792,6 +757,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -804,7 +770,6 @@
             "filter": ""
           },
           "datasource": {
-            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
@@ -874,7 +839,8 @@
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
-              "type": "linear"
+              "log": 2,
+              "type": "log"
             },
             "showPoints": "always",
             "spanNulls": false,
@@ -903,51 +869,74 @@
               }
             ]
           },
-          "unit": "dtdurationms",
-          "unitScale": false
+          "unit": "dtdurationms"
         },
         "overrides": [
           {
             "matcher": {
-              "id": "byName",
-              "options": "Throttles Sum"
+              "id": "byRegexp",
+              "options": "/Maximum$/"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#e24d42",
-                  "mode": "fixed"
+                  "fixedColor": "dark-yellow",
+                  "mode": "shades"
                 }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 20
               }
             ]
           },
           {
             "matcher": {
-              "id": "byName",
-              "options": "Throttles_Average"
+              "id": "byRegexp",
+              "options": "/Minimum$/"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
+                  "fixedColor": "super-light-yellow",
+                  "mode": "shades"
                 }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 9
               }
             ]
           },
           {
             "matcher": {
-              "id": "byName",
-              "options": "Throttles_Sum"
+              "id": "byRegexp",
+              "options": "/Average$/"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#EAB839",
-                  "mode": "fixed"
+                  "fixedColor": "dark-green",
+                  "mode": "shades"
                 }
               }
             ]
@@ -961,7 +950,6 @@
         "y": 30
       },
       "id": 23,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -986,7 +974,6 @@
             "filter": ""
           },
           "datasource": {
-            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
@@ -1071,7 +1058,6 @@
             "filter": ""
           },
           "datasource": {
-            "type": "cloudwatch",
             "uid": "${datasource}"
           },
           "dimensions": {
@@ -1137,13 +1123,13 @@
           },
           "custom": {
             "axisBorderShow": false,
-            "axisCenteredZero": false,
+            "axisCenteredZero": true,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 16,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -1181,8 +1167,7 @@
               }
             ]
           },
-          "unit": "bytes",
-          "unitScale": true
+          "unit": "bytes"
         },
         "overrides": [
           {
@@ -1194,6 +1179,18 @@
               {
                 "id": "custom.axisPlacement",
                 "value": "right"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tx_bytes"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
               }
             ]
           }
@@ -1308,7 +1305,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1330,8 +1327,7 @@
               }
             ]
           },
-          "unit": "none",
-          "unitScale": true
+          "unit": "none"
         },
         "overrides": []
       },
@@ -1342,7 +1338,6 @@
         "y": 39
       },
       "id": 7,
-      "links": [],
       "options": {
         "legend": {
           "calcs": [
@@ -1465,8 +1460,7 @@
               }
             ]
           },
-          "unit": "ms",
-          "unitScale": true
+          "unit": "ms"
         },
         "overrides": []
       },
@@ -1600,8 +1594,7 @@
               }
             ]
           },
-          "unit": "mbytes",
-          "unitScale": true
+          "unit": "mbytes"
         },
         "overrides": [
           {
@@ -1617,6 +1610,25 @@
               {
                 "id": "unit",
                 "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_memory"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "shades"
+                }
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
               }
             ]
           }
@@ -1721,7 +1733,6 @@
         "y": 47
       },
       "id": 22,
-      "links": [],
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
@@ -1799,7 +1810,6 @@
         "y": 54
       },
       "id": 8,
-      "links": [],
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": true,
@@ -1866,7 +1876,7 @@
       "type": "logs"
     }
   ],
-  "refresh": "",
+  "refresh": "auto",
   "schemaVersion": 39,
   "tags": [
     "cloudwatch"
@@ -1980,7 +1990,6 @@
       {
         "current": {},
         "datasource": {
-          "type": "cloudwatch",
           "uid": "${datasource}"
         },
         "definition": "regions()",
