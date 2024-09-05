@@ -465,7 +465,7 @@
           "links": [
             {
               "targetBlank": true,
-              "title": "${__field.labels.host_name} details",
+              "title": "${__field.labels.host_name}${__field.labels.uri}}: ${__field.labels.status} details",
               "url": "/d/otel-jvm-micrometer/opentelemetry-jvm-micrometer?${prom_ds:queryparam}&${loki_ds:queryparam}&${service_name:queryparam}&${deployment_environment:queryparam}&${service_version:queryparam}&${top:queryparam}&${saturation:queryparam}&${jvm_memory_used_id:queryparam}&${jvm_buffer_memory_used_id:queryparam}&var-host_name=${__field.labels.host_name}&var-uri=${__field.labels.uri}&var-status=${__field.labels.status}&${__url_time_range}"
             }
           ],
@@ -620,7 +620,7 @@
           "links": [
             {
               "targetBlank": true,
-              "title": "${__field.labels.host_name} details",
+              "title": "${__field.labels.host_name}${__field.labels.uri}}: ${__field.labels.status} details",
               "url": "/d/otel-jvm-micrometer/opentelemetry-jvm-micrometer?${prom_ds:queryparam}&${loki_ds:queryparam}&${service_name:queryparam}&${deployment_environment:queryparam}&${service_version:queryparam}&${top:queryparam}&${saturation:queryparam}&${jvm_memory_used_id:queryparam}&${jvm_buffer_memory_used_id:queryparam}&var-host_name=${__field.labels.host_name}&var-uri=${__field.labels.uri}&var-status=${__field.labels.status}&${__url_time_range}"
             },
             {
@@ -742,7 +742,7 @@
           "links": [
             {
               "targetBlank": true,
-              "title": "${__field.labels.host_name} details",
+              "title": "${__field.labels.host_name}${__field.labels.uri}}: ${__field.labels.status} details",
               "url": "/d/otel-jvm-micrometer/opentelemetry-jvm-micrometer?${prom_ds:queryparam}&${loki_ds:queryparam}&${service_name:queryparam}&${deployment_environment:queryparam}&${service_version:queryparam}&${top:queryparam}&${saturation:queryparam}&${jvm_memory_used_id:queryparam}&${jvm_buffer_memory_used_id:queryparam}&var-host_name=${__field.labels.host_name}&var-uri=${__field.labels.uri}&var-status=${__field.labels.status}&${__url_time_range}"
             },
             {
@@ -976,8 +976,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1085,8 +1084,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1194,8 +1192,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1304,8 +1301,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3721,7 +3717,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "p50",
             "p95"
@@ -3849,7 +3845,7 @@
   "title": "OpenTelemetry JVM Micrometer",
   "uid": "otel-jvm-micrometer",
   "slug": "otel-jvm-micrometer",
-  "version": 13,
+  "version": 14,
   "weekStart": "",
   "gnetId": 20352,
   "description": "OpenTelemetry JVM Micrometer using RED and USE method"
