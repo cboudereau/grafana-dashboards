@@ -124,7 +124,7 @@
       "title": "GrafanaCloud Billing/Usage",
       "tooltip": "GrafanaCloud Billing/Usage",
       "type": "link",
-      "url": "/d/ac2b8a89-d4bd-496c-880d-ef59087d97d5/billing-usage?orgId=1"
+      "url": "/d/${__dashboard.uid}/${__dashboard}"
     },
     {
       "asDropdown": false,
