@@ -4,11 +4,6 @@ Reference: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Moni
 
 DynamoDB, Kinesis Data Streams, DynamoDB Streams metrics and Global Table metrics.
 
-## Account metrics
-DynamoDB is a SAAS product from AWS and comes with quotas and rate limiting.
-
-![Account metrics](./account.png)
-
 ## Table metrics
 
 ### Errors / Throttles / Rates / Durations
@@ -17,3 +12,8 @@ DynamoDB is a SAAS product from AWS and comes with quotas and rate limiting.
 ### Table and Global Secondary Indexes Reads / Write
 ![Table Reads / Write](./table-1.png)
 ![Global Secondary Indexes Reads / Write](./table-2.png)
+
+## Account metrics
+DynamoDB is a SAAS product from AWS and comes with quotas and rate limiting.
+
+![Account metrics](./account.png)
