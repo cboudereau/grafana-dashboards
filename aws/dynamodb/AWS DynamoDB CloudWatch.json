@@ -796,6 +796,13 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "targetBlank": false,
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -914,6 +921,12 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1159,6 +1172,12 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1276,6 +1295,12 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1394,6 +1419,12 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1611,6 +1642,12 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -2206,7 +2243,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2321,7 +2359,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3576,8 +3615,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3871,7 +3909,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5s",
+  "refresh": "auto",
   "schemaVersion": 39,
   "tags": [
     "cloudwatch"
@@ -4002,7 +4040,7 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "AWS DynamoDB CloudWatch",
-  "uid": "aws-dynamodb-cloudWatch",
+  "uid": "aws-dynamodb-cloudwatch",
   "version": 4,
   "weekStart": "",
   "gnetId": 21974
