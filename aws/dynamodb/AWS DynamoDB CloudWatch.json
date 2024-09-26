@@ -2906,5 +2906,6 @@
   "title": "AWS DynamoDB CloudWatch",
   "uid": "aws-dynamodb-cloudWatch",
   "version": 1,
-  "weekStart": ""
+  "weekStart": "",
+  "gnetId": 21973
 }
