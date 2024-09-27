@@ -69,6 +69,7 @@
   ],
   "panels": [
     {
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -76,7 +77,674 @@
         "y": 0
       },
       "id": 6,
+      "panels": [
+        {
+          "datasource": {
+            "default": false,
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "red",
+                "mode": "shades"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 10,
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "UserErrors",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "A",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Sum"
+            }
+          ],
+          "title": "Errors (${period})",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "default": false,
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "yellow",
+                "mode": "shades"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 17,
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {
+                "Class": "None",
+                "Resource": "*",
+                "Service": "DynamoDB",
+                "Type": "Resource"
+              },
+              "expression": "",
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "ResourceCount",
+              "metricQueryType": 0,
+              "namespace": "AWS/Usage",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "A",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            }
+          ],
+          "title": "Usage (${period})",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "default": false,
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/Utilization/"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/AccountMax/"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-red",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 11
+          },
+          "id": 18,
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "AccountMaxReads",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "A",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "AccountMaxTableLevelReads",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "B",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "AccountProvisionedReadCapacityUtilization",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "C",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "MaxProvisionedTableReadCapacityUtilization",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "D",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            }
+          ],
+          "title": "Reads (${period})",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/Utilization/"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/AccountMax/"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-red",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 11
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max",
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "AccountMaxWrites",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "A",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "AccountMaxTableLevelWrites",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "B",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "AccountProvisionedWriteCapacityUtilization",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "C",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            },
+            {
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {},
+              "expression": "",
+              "hide": false,
+              "id": "",
+              "label": "",
+              "logGroups": [],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "MaxProvisionedTableWriteCapacityUtilization",
+              "metricQueryType": 0,
+              "namespace": "AWS/DynamoDB",
+              "period": "${period}",
+              "queryMode": "Metrics",
+              "refId": "D",
+              "region": "default",
+              "sqlExpression": "",
+              "statistic": "Maximum"
+            }
+          ],
+          "title": "Writes (${period})",
+          "type": "timeseries"
+        }
+      ],
       "title": "Account",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 24,
+      "panels": [],
+      "title": "Tables",
       "type": "row"
     },
     {
@@ -99,9 +767,9 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -109,7 +777,7 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 0,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -118,12 +786,19 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "targetBlank": false,
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -143,12 +818,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 12,
+        "h": 6,
+        "w": 4,
         "x": 0,
-        "y": 1
+        "y": 2
       },
-      "id": 10,
+      "id": 25,
       "options": {
         "legend": {
           "calcs": [
@@ -157,12 +832,14 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
+          "placement": "right",
+          "showLegend": false,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "targets": [
@@ -171,14 +848,17 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "Operation": "*",
+            "TableName": "*"
+          },
           "expression": "",
           "id": "",
           "label": "",
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "UserErrors",
+          "metricName": "SystemErrors",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -201,7 +881,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "yellow",
+            "fixedColor": "orange",
             "mode": "shades"
           },
           "custom": {
@@ -212,9 +892,9 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -222,7 +902,7 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 0,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -231,12 +911,18 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -256,12 +942,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 12,
-        "y": 1
+        "h": 6,
+        "w": 4,
+        "x": 4,
+        "y": 2
       },
-      "id": 17,
+      "id": 15,
       "options": {
         "legend": {
           "calcs": [
@@ -271,11 +957,13 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "targets": [
@@ -285,10 +973,8 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "Class": "None",
-            "Resource": "*",
-            "Service": "DynamoDB",
-            "Type": "Resource"
+            "Operation": "*",
+            "TableName": "*"
           },
           "expression": "",
           "id": "",
@@ -296,29 +982,280 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "ResourceCount",
+          "metricName": "ThrottledRequests",
           "metricQueryType": 0,
-          "namespace": "AWS/Usage",
+          "namespace": "AWS/DynamoDB",
           "period": "${period}",
           "queryMode": "Metrics",
           "refId": "A",
           "region": "default",
           "sqlExpression": "",
-          "statistic": "Maximum"
+          "statistic": "Sum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "ReadThrottleEvents",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "B",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "WriteThrottleEvents",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "C",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "GlobalSecondaryIndexName": "*",
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "ReadThrottleEvents",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "D",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "GlobalSecondaryIndexName": "*",
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "WriteThrottleEvents",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "E",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "GlobalSecondaryIndexName": "*",
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "OnlineIndexThrottleEvents",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "F",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
         }
       ],
-      "title": "Usage (${period})",
+      "title": "Throttling (${period})",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "default": false,
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "green",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 8,
+        "y": 2
+      },
+      "id": 27,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": false,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "Operation": "*",
+            "TableName": "*"
+          },
+          "expression": "",
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "SuccessfulRequestLatency",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "A",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "SampleCount"
+        }
+      ],
+      "title": "Requests Count (${period})",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
             "mode": "palette-classic"
           },
           "custom": {
@@ -354,6 +1291,136 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 12,
+        "y": 2
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": false,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "Operation": "*",
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "SuccessfulRequestLatency",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "B",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Maximum"
+        }
+      ],
+      "title": "Requests Durations (${period})",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -370,47 +1437,15 @@
           },
           "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/Utilization/"
-            },
-            "properties": [
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              },
-              {
-                "id": "unit",
-                "value": "percent"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/AccountMax/"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-red",
-                  "mode": "shades"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 0,
-        "y": 11
+        "h": 6,
+        "w": 4,
+        "x": 16,
+        "y": 2
       },
-      "id": 18,
+      "id": 29,
       "options": {
         "legend": {
           "calcs": [
@@ -420,11 +1455,13 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "targets": [
@@ -433,14 +1470,16 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "id": "",
           "label": "",
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "AccountMaxReads",
+          "metricName": "ConditionalCheckFailedRequests",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -448,14 +1487,16 @@
           "refId": "A",
           "region": "default",
           "sqlExpression": "",
-          "statistic": "Maximum"
+          "statistic": "Sum"
         },
         {
           "datasource": {
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "hide": false,
           "id": "",
@@ -463,7 +1504,7 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "AccountMaxTableLevelReads",
+          "metricName": "ConsumedReadCapacityUnits",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -471,14 +1512,16 @@
           "refId": "B",
           "region": "default",
           "sqlExpression": "",
-          "statistic": "Maximum"
+          "statistic": "Sum"
         },
         {
           "datasource": {
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "hide": false,
           "id": "",
@@ -486,7 +1529,7 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "AccountProvisionedReadCapacityUtilization",
+          "metricName": "OnDemandMaxReadRequestUnits",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -501,7 +1544,9 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "hide": false,
           "id": "",
@@ -509,7 +1554,7 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "MaxProvisionedTableReadCapacityUtilization",
+          "metricName": "ProvisionedReadCapacityUnits",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -518,6 +1563,32 @@
           "region": "default",
           "sqlExpression": "",
           "statistic": "Maximum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "Operation": "*",
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "ReturnedItemCount",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "F",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
         }
       ],
       "title": "Reads (${period})",
@@ -525,13 +1596,13 @@
     },
     {
       "datasource": {
-        "default": false,
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "blue",
             "mode": "palette-classic"
           },
           "custom": {
@@ -567,6 +1638,12 @@
               "mode": "off"
             }
           },
+          "links": [
+            {
+              "title": "${__field.labels.TableName} details",
+              "url": "/d/${__dashboard.uid}/${__dashboard}/?${datasource:queryparam}&${period:queryparam}&${__url_time_range}&var-table=${__field.labels.TableName}"
+            }
+          ],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -583,47 +1660,15 @@
           },
           "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/Utilization/"
-            },
-            "properties": [
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              },
-              {
-                "id": "unit",
-                "value": "percent"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/AccountMax/"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-red",
-                  "mode": "shades"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 12,
-        "y": 11
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 2
       },
-      "id": 2,
+      "id": 30,
       "options": {
         "legend": {
           "calcs": [
@@ -633,11 +1678,13 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "targets": [
@@ -646,14 +1693,16 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "id": "",
           "label": "",
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "AccountMaxWrites",
+          "metricName": "ConsumedWriteCapacityUnits",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -661,14 +1710,16 @@
           "refId": "A",
           "region": "default",
           "sqlExpression": "",
-          "statistic": "Maximum"
+          "statistic": "Sum"
         },
         {
           "datasource": {
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "hide": false,
           "id": "",
@@ -676,7 +1727,7 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "AccountMaxTableLevelWrites",
+          "metricName": "OnDemandMaxWriteRequestUnits",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -691,7 +1742,9 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "hide": false,
           "id": "",
@@ -699,7 +1752,7 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "AccountProvisionedWriteCapacityUtilization",
+          "metricName": "ProvisionedWriteCapacityUnits",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -714,7 +1767,9 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
-          "dimensions": {},
+          "dimensions": {
+            "TableName": "*"
+          },
           "expression": "",
           "hide": false,
           "id": "",
@@ -722,7 +1777,7 @@
           "logGroups": [],
           "matchExact": true,
           "metricEditorMode": 0,
-          "metricName": "MaxProvisionedTableWriteCapacityUtilization",
+          "metricName": "TimeToLiveDeletedItemCount",
           "metricQueryType": 0,
           "namespace": "AWS/DynamoDB",
           "period": "${period}",
@@ -730,29 +1785,54 @@
           "refId": "D",
           "region": "default",
           "sqlExpression": "",
-          "statistic": "Maximum"
+          "statistic": "Sum"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
+          "dimensions": {
+            "TableName": "*"
+          },
+          "expression": "",
+          "hide": false,
+          "id": "",
+          "label": "",
+          "logGroups": [],
+          "matchExact": true,
+          "metricEditorMode": 0,
+          "metricName": "TransactionConflict",
+          "metricQueryType": 0,
+          "namespace": "AWS/DynamoDB",
+          "period": "${period}",
+          "queryMode": "Metrics",
+          "refId": "E",
+          "region": "default",
+          "sqlExpression": "",
+          "statistic": "Sum"
         }
       ],
       "title": "Writes (${period})",
       "type": "timeseries"
     },
     {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 8
       },
       "id": 3,
       "panels": [],
       "repeat": "table",
       "repeatDirection": "h",
-      "title": "Table ${table}",
+      "title": "Table: ${table}",
       "type": "row"
     },
     {
       "datasource": {
-        "default": false,
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
@@ -817,7 +1897,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 9
       },
       "id": 14,
       "options": {
@@ -868,7 +1948,6 @@
     },
     {
       "datasource": {
-        "default": false,
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
@@ -933,9 +2012,9 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 9
       },
-      "id": 15,
+      "id": 26,
       "options": {
         "legend": {
           "calcs": [
@@ -1160,8 +2239,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1177,7 +2255,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 34
+        "y": 21
       },
       "id": 16,
       "options": {
@@ -1276,8 +2354,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1293,9 +2370,9 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 34
+        "y": 21
       },
-      "id": 19,
+      "id": 28,
       "options": {
         "legend": {
           "calcs": [
@@ -1393,8 +2470,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1410,7 +2486,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 31
       },
       "id": 1,
       "options": {
@@ -1609,8 +2685,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1626,7 +2701,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 31
       },
       "id": 7,
       "options": {
@@ -1775,6 +2850,21 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 43
+      },
+      "id": 23,
+      "panels": [],
+      "repeat": "table",
+      "repeatDirection": "h",
+      "title": "Global Secondary Index: ${table}",
+      "type": "row"
+    },
+    {
       "datasource": {
         "default": false,
         "type": "cloudwatch",
@@ -1824,8 +2914,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1841,7 +2930,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 44
       },
       "id": 8,
       "options": {
@@ -1992,8 +3081,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2009,7 +3097,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 44
       },
       "id": 9,
       "options": {
@@ -2164,6 +3252,21 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 56
+      },
+      "id": 20,
+      "panels": [],
+      "repeat": "table",
+      "repeatDirection": "h",
+      "title": "DynamoDB Streams: ${table}",
+      "type": "row"
+    },
+    {
       "datasource": {
         "default": false,
         "type": "cloudwatch",
@@ -2246,7 +3349,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 68
+        "y": 57
       },
       "id": 12,
       "options": {
@@ -2325,7 +3428,6 @@
     },
     {
       "datasource": {
-        "default": false,
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
@@ -2389,7 +3491,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 68
+        "y": 57
       },
       "id": 13,
       "options": {
@@ -2440,8 +3542,22 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 69
+      },
+      "id": 21,
+      "panels": [],
+      "repeat": "table",
+      "repeatDirection": "h",
+      "title": "Kinesis Data Streams: ${table}",
+      "type": "row"
+    },
+    {
       "datasource": {
-        "default": false,
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
@@ -2525,7 +3641,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 80
+        "y": 70
       },
       "id": 5,
       "options": {
@@ -2653,6 +3769,21 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 82
+      },
+      "id": 22,
+      "panels": [],
+      "repeat": "table",
+      "repeatDirection": "h",
+      "title": "Global Table: ${table}",
+      "type": "row"
+    },
+    {
       "datasource": {
         "default": false,
         "type": "cloudwatch",
@@ -2717,8 +3848,8 @@
       "gridPos": {
         "h": 12,
         "w": 12,
-        "x": 12,
-        "y": 80
+        "x": 0,
+        "y": 83
       },
       "id": 11,
       "options": {
@@ -2795,19 +3926,19 @@
         "auto_min": "10s",
         "current": {
           "selected": false,
-          "text": "1m",
-          "value": "1m"
+          "text": "auto",
+          "value": "$__auto_interval_period"
         },
         "hide": 0,
         "name": "period",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "auto",
             "value": "$__auto_interval_period"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "1m",
             "value": "1m"
           },
@@ -2864,6 +3995,7 @@
         "type": "interval"
       },
       {
+        "allValue": "*",
         "current": {},
         "datasource": {
           "type": "cloudwatch",
@@ -2872,7 +4004,7 @@
         "definition": "",
         "hide": 0,
         "includeAll": false,
-        "multi": false,
+        "multi": true,
         "name": "table",
         "options": [],
         "query": {
@@ -2898,8 +4030,8 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "AWS DynamoDB CloudWatch",
-  "uid": "aws-dynamodb-cloudWatch",
-  "version": 1,
+  "uid": "aws-dynamodb-cloudwatch",
+  "version": 4,
   "weekStart": "",
   "gnetId": 21974
 }

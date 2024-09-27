@@ -4,6 +4,10 @@ Reference: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Moni
 
 DynamoDB, Kinesis Data Streams, DynamoDB Streams metrics and Global Table metrics.
 
+## Tables metrics
+A header graphs which display important metrics for all tables in the account (datasource)
+![Tables metrics](./tables.png)
+
 ## Table metrics
 
 ### Errors / Throttles / Rates / Durations
