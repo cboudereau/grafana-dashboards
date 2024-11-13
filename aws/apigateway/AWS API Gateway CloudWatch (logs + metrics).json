@@ -1,14 +1,5 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_CW",
-      "label": "cloudwatch",
-      "description": "CloudWatch datasource",
-      "type": "datasource",
-      "pluginId": "cloudwatch",
-      "pluginName": "CloudWatch"
-    }
-  ],
+  "__inputs": [],
   "__elements": {},
   "__requires": [
     {
@@ -98,7 +89,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CW}"
+        "uid": "${datasource}"
       },
       "gridPos": {
         "h": 6,
@@ -121,7 +112,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {},
           "expression": "fields @timestamp, @message\n| sort @timestamp desc\n| display @timestamp, concat(httpMethod, \" \", protocol, \" \", ip, \" \" ,status, \" \", path), @message",
@@ -153,7 +144,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CW}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -266,7 +257,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -291,7 +282,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -317,7 +308,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -347,7 +338,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CW}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -445,7 +436,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -470,7 +461,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -500,7 +491,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${DS_CW}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -619,7 +610,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -644,7 +635,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -670,7 +661,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -696,7 +687,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${DS_CW}"
+            "uid": "${datasource}"
           },
           "dimensions": {
             "ApiName": "$api_name",
@@ -731,11 +722,7 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "cw",
-          "value": "c2483192-b249-41d3-9cde-9002ac91f8a9"
-        },
+        "current": {},
         "hide": 1,
         "includeAll": false,
         "multi": false,
@@ -842,7 +829,7 @@
         "current": {},
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${DS_CW}"
+          "uid": "${datasource}"
         },
         "definition": "",
         "hide": 1,
@@ -865,7 +852,7 @@
         "current": {},
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${DS_CW}"
+          "uid": "${datasource}"
         },
         "definition": "",
         "hide": 0,
@@ -892,7 +879,7 @@
         "current": {},
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${DS_CW}"
+          "uid": "${datasource}"
         },
         "definition": "",
         "hide": 0,
@@ -927,7 +914,7 @@
   "title": "AWS API Gateway CloudWatch (logs + metrics)",
   "uid": "aws-api-gateway-cloudwatch-logs-metrics",
   "slug": "aws-api-gateway-cloudwatch-logs-metrics",
-  "version": 29,
+  "version": 30,
   "weekStart": "",
   "gnetId": 20796,
   "description": "AWS API Gateway logs and metrics"
