@@ -372,7 +372,7 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "code",
-          "expr": "max by(datasourceType, instance_id, eventName, dashboardName, source, panelId, username, datasourceName) (sum_over_time({instance_type=\"grafana\"} | logfmt | username =~ `.*$username` | dashboardName =~\".*(?i)$dashboard\" | unwrap duration [$__auto]))",
+          "expr": "max by(datasourceType, instance_id, eventName, dashboardId, dashboardName, source, panelId, username, datasourceName) (sum_over_time({instance_type=\"grafana\"} | logfmt | username =~ `.*$username` | dashboardName =~\".*(?i)$dashboard\" | unwrap duration [$__auto]))",
           "legendFormat": "",
           "queryType": "range",
           "refId": "A"
@@ -473,6 +473,6 @@
   "timezone": "",
   "title": "GrafanaCloud Monitoring / Audit Log",
   "uid": "grafanacloud-audit-log",
-  "version": 12,
+  "version": 13,
   "weekStart": ""
 }
