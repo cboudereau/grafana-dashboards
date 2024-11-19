@@ -2123,9 +2123,9 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "builder",
-          "expr": "count by(folderName, dashboardName, instance_id) (rate({instance_type=\"grafana\", org_id=\"$org_id\"} | logfmt [$__auto]))",
+          "expr": "count by(folderName, dashboardName, instance_id, dashboardId) (rate({instance_type=\"grafana\", org_id=\"$org_id\"} | logfmt [$__auto]))",
           "hide": false,
-          "legendFormat": "{{instance_id}} / {{folderName}} / {{dashboardName}}",
+          "legendFormat": "{{instance_id}} / {{folderName}} / {{dashboardId}} - {{dashboardName}}",
           "queryType": "range",
           "refId": "A"
         },
@@ -2135,9 +2135,9 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "builder",
-          "expr": "count by(folderName, dashboardName, username, instance_id) (rate({instance_type=\"grafana\", org_id=\"$org_id\"} | logfmt [$__auto]))",
+          "expr": "count by(folderName, dashboardName, username, instance_id, dashboardId) (rate({instance_type=\"grafana\", org_id=\"$org_id\"} | logfmt [$__auto]))",
           "hide": true,
-          "legendFormat": "[{{username}}] {{folderName}} / {{dashboardName}}",
+          "legendFormat": "[{{username}}] {{folderName}} / {{dashboardId}} - {{dashboardName}}",
           "queryType": "range",
           "refId": "C"
         }
