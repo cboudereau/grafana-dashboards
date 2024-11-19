@@ -88,7 +88,6 @@
       "url": "https://grafana.com/grafana/dashboards/20491"
     }
   ],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -373,8 +372,8 @@
             "uid": "${DS_GRAFANACLOUD-USAGE-INSIGHTS}"
           },
           "editorMode": "code",
-          "expr": "max by(datasourceType, instance_id, eventName, dashboardName, source, panelId, username, datasourceName) (sum_over_time({instance_type=\"grafana\"} | logfmt | username =~ `.*$username` | unwrap duration [$__auto]))",
-          "legendFormat": "{{labels.username}}",
+          "expr": "max by(datasourceType, instance_id, eventName, dashboardName, source, panelId, username, datasourceName) (sum_over_time({instance_type=\"grafana\"} | logfmt | username =~ `.*$username` | dashboardName =~\".*(?i)$dashboard\" | unwrap duration [$__auto]))",
+          "legendFormat": "",
           "queryType": "range",
           "refId": "A"
         }
@@ -446,7 +445,22 @@
           }
         ],
         "query": "",
-        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "name": "dashboard",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
         "type": "textbox"
       }
     ]
