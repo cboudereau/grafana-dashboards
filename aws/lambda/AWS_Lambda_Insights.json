@@ -383,7 +383,7 @@
           "dimensions": {
             "FunctionName": "${function_name}"
           },
-          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message =~ /WARN|ERROR/\n| display @timestamp, @message",
+          "expression": "fields @timestamp, @message, @logStream, @log\n| sort @timestamp desc\n| filter  @log LIKE \"$function_name\"\n| filter @message =~ /WARN|ERROR|Exception/\n| display @timestamp, @message",
           "functions": [],
           "group": {
             "filter": ""
