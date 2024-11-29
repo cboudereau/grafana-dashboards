@@ -3,6 +3,12 @@
   "__elements": {},
   "__requires": [
     {
+      "type": "datasource",
+      "id": "cloudwatch",
+      "name": "CloudWatch",
+      "version": "1.0.0"
+    },
+    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
