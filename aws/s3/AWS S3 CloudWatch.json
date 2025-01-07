@@ -2534,5 +2534,6 @@
   "title": "AWS S3 CloudWatch",
   "uid": "aws-s3-cloudwatch",
   "version": 1,
-  "weekStart": ""
+  "weekStart": "",
+  "gnetId": 22632
 }
