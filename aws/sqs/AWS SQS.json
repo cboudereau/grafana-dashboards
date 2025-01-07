@@ -237,7 +237,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "G",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Average"
         },
@@ -262,7 +262,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "A",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Average"
         }
@@ -504,7 +504,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "B",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Sum"
         },
@@ -529,7 +529,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "C",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Sum"
         },
@@ -554,7 +554,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "E",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Sum"
         },
@@ -579,7 +579,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "A",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Sum"
         },
@@ -604,7 +604,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "D",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Sum"
         },
@@ -629,7 +629,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "F",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Sum"
         }
@@ -758,7 +758,7 @@
           "period": "$period",
           "queryMode": "Metrics",
           "refId": "A",
-          "region": "default",
+          "region": "$region",
           "sqlExpression": "",
           "statistic": "Maximum"
         }
@@ -793,30 +793,23 @@
         "type": "datasource"
       },
       {
+        "allowCustomValue": false,
         "current": {},
         "datasource": {
           "type": "cloudwatch",
           "uid": "${datasource}"
         },
         "definition": "",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Queue name",
-        "multi": true,
-        "name": "queue",
+        "hide": 1,
+        "name": "region",
         "options": [],
         "query": {
-          "dimensionKey": "QueueName",
-          "metricName": "ApproximateAgeOfOldestMessage",
-          "namespace": "AWS/SQS",
-          "queryType": "dimensionValues",
+          "queryType": "regions",
           "refId": "CloudWatchVariableQueryEditor-VariableQuery",
-          "region": "default"
+          "region": "$region"
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -829,6 +822,7 @@
           "value": "$__auto_interval_period"
         },
         "hide": 0,
+        "label": "Period",
         "name": "period",
         "options": [
           {
@@ -897,6 +891,33 @@
         "refresh": 2,
         "skipUrlSync": false,
         "type": "interval"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "${datasource}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Queue name",
+        "multi": true,
+        "name": "queue",
+        "options": [],
+        "query": {
+          "dimensionKey": "QueueName",
+          "metricName": "ApproximateAgeOfOldestMessage",
+          "namespace": "AWS/SQS",
+          "queryType": "dimensionValues",
+          "refId": "CloudWatchVariableQueryEditor-VariableQuery",
+          "region": "$region"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -907,7 +928,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "AWS SQS CloudWatch",
-  "uid": "0377675a-975e-4dfa-bd21-bbb84799ed80",
+  "uid": "aws-sqs-cloudwatch",
   "version": 4,
   "weekStart": "",
   "slug": "aws-sqs-cloudwatch",
