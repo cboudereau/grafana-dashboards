@@ -2427,10 +2427,16 @@
         "auto_min": "10s",
         "current": {
           "text": "$__auto",
-          "value": "$__auto"
+          "value": "$__auto_interval_period"
         },
+        "label": "Period",
         "name": "period",
         "options": [
+          {
+            "selected": true,
+            "text": "auto",
+            "value": "$__auto_interval_period"
+          },
           {
             "selected": false,
             "text": "1m",
