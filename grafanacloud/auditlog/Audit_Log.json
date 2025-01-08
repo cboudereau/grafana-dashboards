@@ -472,6 +472,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "GrafanaCloud Monitoring / Audit Log",
+  "description": "GrafanaCloud Monitoring / Audit Log using GrafanaCloud telemetry",
   "uid": "grafanacloud-audit-log",
   "version": 13,
   "weekStart": ""
