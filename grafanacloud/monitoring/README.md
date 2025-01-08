@@ -2,6 +2,8 @@
 
 This dashboard helps GrafanaCloud admin to monitor telemetry rate limiting, drops and errors to increase quotas for GrafanaCloud.
 
+![Header](./0_Header.png)
+
 ## Costs
 ![Costs](./0_costs.png)
 
