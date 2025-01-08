@@ -3969,6 +3969,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "GrafanaCloud Monitoring / Billing / Usage",
+  "description": "GrafanaCloud Monitoring / Billing / Usage using GrafanaCloud usage telemetry",
   "uid": "grafanacloud-monitoring",
   "version": 123,
   "weekStart": ""
