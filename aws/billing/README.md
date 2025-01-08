@@ -2,14 +2,16 @@
 
 This dashboard displays cost for multiple aws account.
 
+![Header](./0_Header.png)
+
 # Multi datasource/aws account stats
 ## Last month vs Current month
-![Last month vs Current month](./Screenshot%202024-01-10%20141508.png)
+![Last month vs Current month](./1_Last_month_vs_Current_month.png)
 
 ## Detailed view per account
-![Detailed view 1](./Screenshot%202024-01-10%20144042.png)
+![Detailed view 1](./2_Detailed_view_1.png)
 
-![Detailed view 2](./Screenshot%202024-01-10%20144643.png)
+![Detailed view 2](./3_Detailed_view_2.png)
 
 ## FAQ
 
