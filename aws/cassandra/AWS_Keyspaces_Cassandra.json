@@ -1213,8 +1213,10 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "AWS Cassandra",
-  "uid": "aws-cassandra",
-  "version": 15,
+  "title": "AWS Keyspaces/Cassandra",
+  "uid": "aws-keyspaces-cassandra",
+  "description": "AWS Keyspaces/Cassandra metrics",
+  "version": 16,
+  "gnetId": 19699,
   "weekStart": ""
 }
