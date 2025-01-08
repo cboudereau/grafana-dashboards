@@ -4053,6 +4053,7 @@
   "timezone": "browser",
   "title": "AWS DynamoDB CloudWatch",
   "uid": "aws-dynamodb-cloudwatch",
+  "description": "AWS DynamoDB CloudWatch metrics",
   "version": 4,
   "weekStart": "",
   "gnetId": 21974
