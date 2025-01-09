@@ -179,7 +179,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "StorageType": "AllStorageTypes"
           },
           "expression": "",
@@ -302,7 +302,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "StorageType": "*"
           },
           "expression": "",
@@ -436,7 +436,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -461,7 +461,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -581,7 +581,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -607,7 +607,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -633,7 +633,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -659,7 +659,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -685,7 +685,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -711,7 +711,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -737,7 +737,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -763,7 +763,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -789,7 +789,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -909,7 +909,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -935,7 +935,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -1055,7 +1055,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -1081,7 +1081,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -1107,7 +1107,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -1133,7 +1133,7 @@
             "uid": "${datasource}"
           },
           "dimensions": {
-            "BucketName": "*",
+            "BucketName": "$bucket",
             "FilterId": "*"
           },
           "expression": "",
@@ -2528,6 +2528,31 @@
         "query": "7d,14d,30d",
         "refresh": 2,
         "type": "interval"
+      },
+      {
+        "allValue": "*",
+        "allowCustomValue": false,
+        "current": {},
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "${datasource}"
+        },
+        "definition": "",
+        "includeAll": true,
+        "label": "Bucket",
+        "name": "bucket",
+        "options": [],
+        "query": {
+          "dimensionKey": "BucketName",
+          "metricName": "NumberOfObjects",
+          "namespace": "AWS/S3",
+          "queryType": "dimensionValues",
+          "refId": "CloudWatchVariableQueryEditor-VariableQuery",
+          "region": "$region"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
