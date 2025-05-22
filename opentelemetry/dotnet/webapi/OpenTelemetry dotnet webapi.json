@@ -237,7 +237,7 @@
             "uid": "${prom_ds}"
           },
           "editorMode": "code",
-          "expr": "topk(${top}, \r\n    sum by (http_response_status_code) (rate(http_server_request_duration_seconds_count{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=~\"${host_name}\", http_route=~\"${http_route}\", http_response_status_code=~\"${http_response_status_code}\"}[1m]))\r\n)",
+          "expr": "topk(${top}, \r\n    sum by (http_response_status_code) (rate(http_server_request_duration_seconds_count{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=~\"${host_name}\", http_route=~\"${http_route}\", http_response_status_code=~\"${http_response_status_code}\"}[$__rate_interval]))\r\n)",
           "instant": false,
           "legendFormat": "{{http_response_status_code}}",
           "range": true,
@@ -505,7 +505,7 @@
             "uid": "${prom_ds}"
           },
           "editorMode": "code",
-          "expr": "topk(${top}, \r\n    sum by (host_name,http_request_method,http_route,url_scheme,http_response_status_code) (rate(http_server_request_duration_seconds_count{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=~\"${host_name}\", http_route=~\"${http_route}\", http_response_status_code=~\"${http_response_status_code}\"}[1m]))\r\n)",
+          "expr": "topk(${top}, \r\n    sum by (host_name,http_request_method,http_route,url_scheme,http_response_status_code) (rate(http_server_request_duration_seconds_count{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=~\"${host_name}\", http_route=~\"${http_route}\", http_response_status_code=~\"${http_response_status_code}\"}[$__rate_interval]))\r\n)",
           "instant": false,
           "legendFormat": "{{http_request_method}} {{url_scheme}}://{{host_name}}{{http_route}}: {{http_response_status_code}}",
           "range": true,
@@ -639,7 +639,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "topk(${top}, \r\n    sum by(host_name, url_scheme, http_request_method, http_route, http_response_status_code, error_type) (rate(http_server_request_duration_seconds_count{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=~\"${host_name}\", http_route=~\"${http_route}\", http_response_status_code!~\"[1-3]..\", http_response_status_code=~\"${http_response_status_code}\"}[1m]))\r\n)",
+          "expr": "topk(${top}, \r\n    sum by(host_name, url_scheme, http_request_method, http_route, http_response_status_code, error_type) (rate(http_server_request_duration_seconds_count{service_name=\"${service_name}\", service_version=\"${service_version}\", deployment_environment=\"${deployment_environment}\", host_name=~\"${host_name}\", http_route=~\"${http_route}\", http_response_status_code!~\"[1-3]..\", http_response_status_code=~\"${http_response_status_code}\"}[$__rate_interval]))\r\n)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
