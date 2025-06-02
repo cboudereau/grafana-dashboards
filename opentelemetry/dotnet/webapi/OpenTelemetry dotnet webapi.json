@@ -3127,7 +3127,7 @@
           "type": "prometheus",
           "uid": "${prom_ds}"
         },
-        "definition": "label_values(process_runtime_dotnet_gc_duration_nanoseconds_total,service_name)",
+        "definition": "label_values(dotnet_assembly_count,service_name)",
         "hide": 1,
         "includeAll": false,
         "label": "Service Name",
@@ -3136,7 +3136,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(process_runtime_dotnet_gc_duration_nanoseconds_total,service_name)",
+          "query": "label_values(dotnet_assembly_count,service_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3151,7 +3151,7 @@
           "type": "prometheus",
           "uid": "${prom_ds}"
         },
-        "definition": "label_values(process_runtime_dotnet_gc_duration_nanoseconds_total{service_name=\"$service_name\"},deployment_environment)",
+        "definition": "label_values(dotnet_assembly_count{service_name=\"$service_name\"},deployment_environment)",
         "hide": 1,
         "includeAll": false,
         "label": "Deployment Environment",
@@ -3160,7 +3160,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(process_runtime_dotnet_gc_duration_nanoseconds_total{service_name=\"$service_name\"},deployment_environment)",
+          "query": "label_values(dotnet_assembly_count{service_name=\"$service_name\"},deployment_environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3175,7 +3175,7 @@
           "type": "prometheus",
           "uid": "${prom_ds}"
         },
-        "definition": "label_values(process_runtime_dotnet_gc_duration_nanoseconds_total{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"},service_version)",
+        "definition": "label_values(dotnet_assembly_count{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"},service_version)",
         "hide": 1,
         "includeAll": false,
         "label": "Service version",
@@ -3184,7 +3184,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(process_runtime_dotnet_gc_duration_nanoseconds_total{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"},service_version)",
+          "query": "label_values(dotnet_assembly_count{service_name=\"$service_name\", deployment_environment=\"$deployment_environment\"},service_version)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
