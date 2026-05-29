@@ -274,83 +274,6 @@
         "type": "cloudwatch",
         "uid": "${datasource}"
       },
-      "gridPos": {
-        "h": 5,
-        "w": 24,
-        "x": 0,
-        "y": 8
-      },
-      "id": 20,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": true,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "pluginVersion": "10.4.0-65039",
-      "targets": [
-        {
-          "alias": "{{metric}} {{stat}}",
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "cloudwatch",
-            "uid": "${datasource}"
-          },
-          "dimensions": {
-            "FunctionName": "${function_name}"
-          },
-          "expression": "fields @timestamp, function_name, shutdown_reason, @message\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)\n| display  @timestamp, shutdown_reason, @message",
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "highResolution": false,
-          "host": {
-            "filter": ""
-          },
-          "id": "",
-          "item": {
-            "filter": ""
-          },
-          "logGroups": [
-            {
-              "arn": "$lambda_log_groups",
-              "name": "$lambda_log_groups"
-            }
-          ],
-          "matchExact": true,
-          "metricEditorMode": 0,
-          "metricName": "Errors",
-          "metricQueryType": 0,
-          "mode": 0,
-          "namespace": "AWS/Lambda",
-          "options": {
-            "showDisabledItems": false
-          },
-          "period": "${period}",
-          "queryMode": "Logs",
-          "refId": "A",
-          "region": "$region",
-          "returnData": false,
-          "sqlExpression": "",
-          "statistic": "Sum",
-          "statsGroups": []
-        }
-      ],
-      "title": "Shutdown reason",
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "cloudwatch",
-        "uid": "${datasource}"
-      },
       "description": "",
       "gridPos": {
         "h": 7,
@@ -1629,6 +1552,83 @@
             "type": "cloudwatch",
             "uid": "${datasource}"
           },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 56
+          },
+          "id": 20,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": true,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "pluginVersion": "10.4.0-65039",
+          "targets": [
+            {
+              "alias": "{{metric}} {{stat}}",
+              "application": {
+                "filter": ""
+              },
+              "datasource": {
+                "type": "cloudwatch",
+                "uid": "${datasource}"
+              },
+              "dimensions": {
+                "FunctionName": "${function_name}"
+              },
+              "expression": "fields @timestamp, function_name, shutdown_reason, @message\n| filter function_name = \"$function_name\"\n| sort @timestamp desc\n| filter ispresent(shutdown_reason)\n| display  @timestamp, shutdown_reason, @message",
+              "functions": [],
+              "group": {
+                "filter": ""
+              },
+              "highResolution": false,
+              "host": {
+                "filter": ""
+              },
+              "id": "",
+              "item": {
+                "filter": ""
+              },
+              "logGroups": [
+                {
+                  "arn": "$lambda_log_groups",
+                  "name": "$lambda_log_groups"
+                }
+              ],
+              "matchExact": true,
+              "metricEditorMode": 0,
+              "metricName": "Errors",
+              "metricQueryType": 0,
+              "mode": 0,
+              "namespace": "AWS/Lambda",
+              "options": {
+                "showDisabledItems": false
+              },
+              "period": "${period}",
+              "queryMode": "Logs",
+              "refId": "A",
+              "region": "$region",
+              "returnData": false,
+              "sqlExpression": "",
+              "statistic": "Sum",
+              "statsGroups": []
+            }
+          ],
+          "title": "Shutdown reason",
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${datasource}"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1713,7 +1713,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 56
+            "y": 61
           },
           "id": 15,
           "options": {
@@ -1846,7 +1846,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 56
+            "y": 61
           },
           "id": 16,
           "options": {
@@ -2016,7 +2016,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 56
+            "y": 61
           },
           "id": 17,
           "options": {
@@ -2094,7 +2094,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 63
+            "y": 68
           },
           "id": 8,
           "options": {
@@ -2414,7 +2414,7 @@
   "timezone": "browser",
   "title": "AWS Lambda Insights",
   "uid": "aws-lambda-insights",
-  "version": 8,
+  "version": 9,
   "weekStart": "",
   "gnetId": 19734
 }
