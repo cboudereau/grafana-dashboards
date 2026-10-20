@@ -1,5 +1,7 @@
 # AWS RDS Aurora
 
+Dashboard: https://grafana.com/grafana/dashboards/25949
+
 Reference: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraMySQL.Monitoring.Metrics.html
 
 Quotas: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html
