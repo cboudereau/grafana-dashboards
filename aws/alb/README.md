@@ -8,6 +8,8 @@ This dashboard uses the AWS/ApplicationELB CloudWatch namespace for an Applicati
 
 Rows follow the sections of the reference page. Metric families left out: TLS negotiation (no TLS listener), user authentication (no authenticate action), Lambda targets, stickiness, IPv6, BYoIP, low-reputation packet filtering, LCU reservation, and target optimizer, none of them deployed.
 
+![Header](./0_Header.png)
+
 ## Deployed variant
 Built for a load balancer created by the AWS Load Balancer Controller from a Kubernetes Ingress: internal scheme, one HTTP listener, IP targets (pods), one target group per Service, HTTP health check on the application's health path, cross-zone load balancing disabled, deletion protection in production only. No access logs, no WAF, no listener rules beyond the default.
 
@@ -19,10 +21,14 @@ Dimension `LoadBalancer`, with a per-zone breakdown from the `AvailabilityZone` 
 
 The connection limit is not a published number: it scales with the load balancer, and `RejectedConnectionCount` is the only signal. The 5XX split tells where to look: 502 at the target's response, 503 at target health, 504 at the idle timeout.
 
+![Load balancers](./1_LoadBalancers.png)
+
 ## LCUs
 Capacity units drive the bill: the highest of new connections, active connections, processed bytes, and rule evaluations per hour. Capacity utilization draws a warning line; a sustained high value calls for an LCU reservation.
 
 Pricing: https://aws.amazon.com/elasticloadbalancing/pricing/
+
+![LCUs](./2_LCUs.png)
 
 ## Targets
 Dimensions `LoadBalancer` and `TargetGroup`. The target group variable is multi-select and filtered by the selected load balancer, so "All" stays on that load balancer.
@@ -36,10 +42,15 @@ Set `min_healthy_targets` to the minimum replica count of the deployment.
 
 Statistics: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-metrics.html#metric-statistics
 
+![Targets: rate and errors](./3_Targets_1.png)
+![Targets: duration and saturation](./3_Targets_2.png)
+
 ## Target group health
 Zones meeting or missing the DNS and routing healthy-state thresholds, and requests routed by the fail-open action.
 
 Reference: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-health
+
+![Target group health](./4_TargetGroupHealth.png)
 
 ## Logs
 Access logs and connection logs go to S3, not to CloudWatch Logs, so this dashboard has no Logs row. Enable access logs on the load balancer and query them with Athena when the metrics are not enough.
