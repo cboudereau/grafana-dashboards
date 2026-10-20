@@ -45,6 +45,18 @@
   "links": [
     {
       "asDropdown": false,
+      "icon": "dashboard",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "grafana.com",
+      "tooltip": "grafana.com dashboard",
+      "type": "link",
+      "url": "https://grafana.com/grafana/dashboards/25950"
+    },
+    {
+      "asDropdown": false,
       "icon": "external link",
       "includeVars": false,
       "keepTime": false,
